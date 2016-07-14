@@ -1,0 +1,5 @@
+.project
+.pydevproject
+.settings
+SABtractor/test_no_upload
+*~
