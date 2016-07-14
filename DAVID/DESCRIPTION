@@ -1,0 +1,10 @@
+Package: DAVIDPerlClient
+Type: Package
+Title: an R encapsulater of DAVID Web Service Perl client
+Version: 0.1.2
+Date: 2013-12-23
+Author: foehn <foehn@foxmail.com>
+Maintainer: foehn <foehn@foxmail.com>
+Description: an R package using DAVID Web Service Perl client for DAVID functional analyses in batch
+License: GPL-2
+SystemRequirements: Perl
