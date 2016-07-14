@@ -1,0 +1,34 @@
+Toll-like Receptor (TLR) Signaling	Toll-like Receptor (TLR) Signaling	Toll-like Receptor (TLR) Signaling	Toll-like Receptor (TLR) Signaling	NOD-like Receptor (NLR) Signaling	NOD-like Receptor (NLR) Signaling	NOD-like Receptor (NLR) Signaling	Other Bacterial Pattern Recognition Receptors (PRRs)	Downstream Signal Transduction	Downstream Signal Transduction	Downstream Signal Transduction	Apoptosis	Inflammatory Response	Cytokines & Chemokines	Antimicrobial Peptides
+Receptors & Cofactors	MYD88-Dependent	TICAM1 (TRIF) Dependent (MYD88-Independent)	Other	Receptors	Inflammasomes	Regulation		NF?B Pathway	ERK Pathway	p38/JNK Pathway				
+Cd14	Fadd	Irf5	Akt1	Naip6	Casp1 (Ice)	Birc3 (c-IAP1)	Apcs	Bcl10	Jun	Jun	Akt1	Akt1	Ccl3 (Mip-1a)	Bpi
+Ctsk	Irak1	Irf7	Casp8 (Flice)	Nlrc4 (Ipaf)	Naip6	Card6	Crp	Chuk (IKKa)	Map2k1 (Mek1)	Map2k3 (Mek3)	Birc3 (c-IAP1)	Apcs	Ccl4 (Mip-1b)	Camp
+Tlr1	Irak3	Map3k7 (Tak1)	Lbp	Nlrp1a	Nlrc4 (Ipaf)	Card9	Dmbt1	Ikbkb	Mapk1 (Erk2)	Map2k4 (Jnkk1)	Card6	Ccl3 (Mip-1a)	Ccl5 (Rantes)	Ctsg
+Tlr2	Irf5	Tab1 (Tab1)	Pik3ca (p110a)	Nlrp3	Nlrp1a	Casp8 (Flice)	Zbp1	Nfkb1	Mapk3 (Erk1)	Mapk14 (p38 MAPK)	Card9	Ccl5 (Rantes)	Cxcl1	Lcn2 (Ngal)
+Tlr4	Irf7	Ripk1	Pik3r1	Nod2	Nlrp3	Hsp90aa1		Nfkbia (IkBa/Mad3)		Mapk8 (Jnk1)	Casp1 (Ice)	Cd14	Cxcl3	Lyz2
+Tlr5	Map3k7 (Tak1)	Ticam2 (tram)	Pstpip1		Pycard (Tms1/Asc)	Mefv		Rela			Casp8 (Flice)	Crp	Ifnb1	Mpo
+Tlr6	Tab1 (Tab1)	Tlr4	Rac1			Ripk2		Tnfrsf1a			Cd14	Cxcl1	Il12a	Prtn3
+Tlr9	Myd88	Traf6				Sugt1					Fadd	Cxcl3	Il12b	Slpi
+	Tirap					Tnf					Ifnb1	Il1b	Il18	
+	Tlr1					Xiap					Ikbkb	Il6	Il1b	
+	Tlr2										Il12a	Lbp	Il6	
+	Tlr4										Il12b	Lyz2		
+	Tlr5										Il1b	Mefv		
+	Tlr6										Il6	Myd88		
+	Tlr9										Irak1	Nfkb1		
+	Tollip										Jun	Nlrc4		
+	Traf6										Map3k7 (Tak1)	Nlrp3		
+											Mapk1 (Erk2)	Rac1		
+											Mapk8 (Jnk1)	Rela		
+											Mpo	Ripk2		
+											Nfkb1	Slc11a1		
+											Nfkbia (IkBa/Mad3)	Ticam2 (Tram)		
+											Pik3ca	Tirap		
+											Prdx2	Tlr1		
+											Pycard	Tlr2		
+											Rac1	Tlr4		
+											Ripk1	Tlr5		
+											Ripk2	Tlr6		
+											Tnf	Tlr9		
+											Tnfrsf1a	Tnf		
+											Traf6	Tnfrsf1a		
+												Tollip		

@@ -1,0 +1,19 @@
+Chemokine Ligands	Chemokine Ligands	Chemokine Ligands	Chemokine Ligands	Chemokine Receptors	Chemokine Receptors	Chemokine Receptors	Chemokine Receptors	Cytokines Involved in Chemotaxis	Cytokine Receptors Involved in Chemotaxis	Other Genes Involved in Chemotaxis
+a Chemokine (CXC Motif)	β Chemokine (CC Motif)	γ                                              Chemokine (C Motif)	δ Chemokine (CX3C Motif)	a Chemokine (CXC Motif)	β Chemokine (CC Motif)	δ Chemokine (CX3C Motif)	Atypical			
+Cxcl1 (Cxcr1)	Ccl11 (Eotaxin)	Xcl1	Cx3cl1	Cxcr2	Ccr1	Cx3cr1	Ackr2	C5	C5ar1 (Gpr77)	Hif1a
+Cxcl10 (Inp10)	Ccl12			Cxcr3	Ccr1l1		Ccrl2	Cklf	Cmklr1	Itgam
+Cxcl11 (I-Tac/Ip-9)	Ccl17 (Tarc)			Cxcr4	Ccr10		Cxcr7	Cmtm2a	Fpr1	Itgb2
+Cxcl12 (Sdf1)	Ccl19			Cxcr5	Ccr2			Cmtm3	Gpr17	Kdr
+Cxcl13	Ccl2 (Mcp-1)			Cxcr6	Ccr3			Cmtm5		Mapk1 (Erk2)
+Cxcl14	Ccl20 (Mip-3a)			Cxcr1 (Cxcr1)	Ccr4			Fgf2 (bFGF)		Mapk14 (p38 MAPK)
+Cxcl16	Ccl21 (Mip-2)				Ccr5			Ifng		Plau (uPA)
+Cxcl2 (Il8rb)	Ccl22 (Mdc)				Ccr6			Il10		Prkca
+Cxcl3	Ccl24 (Eotaxin 2)				Ccr7			Il16		Slit2
+Cxcl5 (Ena-78/Lix)	Ccl25 (Teck)				Ccr8			Il1b		Tlr2
+Cxcl9 (Mig)	Ccl28				Ccr9			Il4		Tlr4
+	Ccl3 (Mip-1a)							Il6		Tymp
+	Ccl4 (Mip-1b)							Pf4		
+	Ccl5 (Rantes)							Ppbp		
+	Ccl6							Tgfb1		
+	Ccl7 (Mcp-3)							Tnf		
+	Ccl9							Vegfa		

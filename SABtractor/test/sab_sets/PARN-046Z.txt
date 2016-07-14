@@ -1,0 +1,44 @@
+N-Acetylgalactosaminyltransferases	N-Acetylglucosaminyltransferases	Galactosyltransferases	Mannosidases	Mannosyltransferases	Galactosides & Glucosidases & Hexosaminidases	Fucosidases & Fucosyltransferases	Sialidases	Sialyltransferases	Mannose-6-Phosphate Synthesis & Catabolism	N-Linked Glycosylation	O-Linked Glycosylation	Glycosphingolipids	Other Genes
+													
+Galnt1	B3gnt6	B4galnt1	Edem1	Pomt1	Ganab	Fuca1	Neu1	St3gal1	Gnptg	Aga	B3gnt6	B4galt1	Aga
+Galnt10	B3gnt8	B4galnt4	Edem2	Pomt2	Gcs1	Fuca2	Neu2	St3gal2	Nagpa	B3gnt8	B3gnt8	B4galt2	C1galt1c1
+Galnt11	Gcnt1	B4galt1	Man1a1		Glb1	Fut11	Neu4	St6gal1		B4galt1	B4galt5	B4galt3	
+Galnt13	Gcnt3	B4galt2	Man1a2		Hexa	Fut8		St6gal2		B4galt2	C1galt1	Glb1	
+Galnt14	Lfng	B4galt3	Man1c1		Hexb	Pofut1		St6galnac1		B4galt3	C1galt1c1	Hexa	
+Galnt2	Mfng	B4galt5	Man2a1		Prkcsh	Pofut2		St6galnac2		Edem1	Galnt1	Hexb	
+Galnt3	Mgat1	C1galt1	Man2a2					St8sia1		Edem2	Galnt10	St3gal1	
+Galnt4	Mgat2		Man2b1					St8sia2		Fuca1	Galnt11	St3gal2	
+Galnt5	Mgat3		Man2c1					St8sia3		Fuca2	Galnt13	St3gal4	
+Galnt7	Mgat4a		Manba					St8sia5		Fut11	Galnt14	St8sia6	
+Galnt9	Mgat4b		Manea					St8sia6		Fut8	Galnt2	Wbscr17	
+Galnt16	Mgat4c									Ganab	Galnt3		
+Galnt15	Mgat5									Glb1	Galnt4		
+Galnt18	Mgat5b									Gnptg	Galnt5		
+Wbscr17	Ogt									Hexa	Galnt7		
+	Pomgnt1									Hexb	Galnt9		
+	Rfng									Man1a1	Galnt16		
+										Man1a2	Gcnt1		
+										Man1c1	Gcnt3		
+										Man2a1	Ogt		
+										Man2a2	Pofut1		
+										Man2b1	Pofut2		
+										Manba	Pomgnt1		
+										Mgat1	Pomt1		
+										Mgat2	Pomt2		
+										Mgat3	St3gal1		
+										Mgat4a	St3gal2		
+										Mgat4b	St3gal4		
+										Mgat4c	St6galnac1		
+										Mgat5	St8sia3		
+										Mgat5b	St8sia6		
+										Nagpa	Wbscr17		
+										Neu1			
+										Neu2			
+										Neu4			
+										Prkcsh			
+										St6gal1			
+										St8sia1			
+										St8sia2			
+										St8sia3			
+										St8sia6			
+										Uggt1 (Ugcgl1)			

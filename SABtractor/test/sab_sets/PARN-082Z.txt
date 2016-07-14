@@ -1,0 +1,33 @@
+Stemness Markers	MSC-Specific Markers	Other Genes Associated with MSC	MSC Differentiation Markers	MSC Differentiation Markers	MSC Differentiation Markers	MSC Differentiation Markers	MSC Differentiation Markers
+			Gene involved in Osteogenesis	Gene involved in Adipogenesis	Gene involved in Chondrogenesis	Gene involved in Myogenesis	Gene involved in Tenogenesis (Tendon Development)
+Fgf2	Alcam	Anxa5	Bmp2	Adipoq	Abcb1a (Mdr-1)	Acta2 (a-SMA)	Bmp2
+Ins2	Anpep	Bdnf	Bmp6	Pparg	Bmp2	Jag1	Gdf15 (Plab)
+Lif	Bmp2	Bglap (Osteocalcin)	Fgf10	Rhoa	Bmp4	Notch1	Smad4
+Pou5f1 (Oct4)	Casp3	Bmp7	Hdac1	Runx2	Bmp6		Tgfb1
+Sox2	Cd44	Col1a1	Hnf1a		Gdf5 (CDMP-1)		
+Tert	Eng (Evi-1)	Csf2 (GM-CSF)	Kdr		Gdf6		
+Wnt3a	Erbb2 (Her-2)	Csf3 (GCSF)	Ptk2		Gdf7		
+Zfp42	Fut4	Ctnnb1	Smurf1 (Smurf1)		Hat1		
+	Fzd9	Egf	Runx2		Itgax		
+	Itga6	Fut1	Smurf2		Sox9		
+	Itgav	Hgf (Scatter Factor)	Tbx5		Tgfb1		
+	Kdr	Icam1					
+	Mcam	Ifng					
+	Ngfr	Igf1					
+	Nt5e	Il10					
+	Pdgfrb	Il1b					
+	Prom1	Il6					
+	Thy1	Itgb1					
+	Vcam1	Kitlg					
+		Mitf					
+		Mmp2 (Gelatinase A)					
+		Nes					
+		Nudt6					
+		Pigs					
+		Ptprc					
+		Slc17a5					
+		Tgfb3					
+		Tnf					
+		Vegfa					
+		Vim					
+		Vwf					

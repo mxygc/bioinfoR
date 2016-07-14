@@ -1,0 +1,24 @@
+Development & Differentiation	Development & Differentiation	Development & Differentiation	Calcium Binding and Signaling	Adhesion	Migration	Cell Cycle	Proteolysis	Signal Transduction	Signal Transduction	Signal Transduction	Signal Transduction	Transcription Factors	Transcription Factors
+Growth Factors	Transcription Factors	Other Genes						WNT Signaling	TGF                                              Signaling	Hedgehog Signaling	Notch Signaling	WNT Signaling	Others
+Angptl4	Cdkn2a (p16Ink4)	Antxr1	Bglap	Abcb1a (Mdr-1)	Cd44	Ahr	Dpp10	Axin2	Bmp4	Smo	Jag1	Lef1	Ahr
+Bmp4	Egr1	Ccnd1	Cacna2d3	Bglap	Ctgf	Birc5	Mmp2 (Gelatinase A)	Btrc (b-TrCP)	Fst	Ptch1		Tcf7l2	Cdkn2a (p16Ink4)
+Ctgf	Nanog	Ccnd2	Ccnd1	Cd44	Efnb1	Ccnd1	Mmp7 (Matrilysin)	Dkk1	Gdf5 (Cdmp-1)			Tcf7l1	Cebpd
+Fgf20	Pou5f1 (Oct4)	Cdh1 (E-cadherin)	Cubn	Cdh1 (E-cadherin)	Egfr	Ccnd2	Mmp9 (Gelatinase B)	Fgf9	Id2			Tcf7	Egr1
+Fgf4	Ppard	Cdon	Egfr	Ctgf	Enpp2	Cdkn2a (p16Ink4)	Plaur (uPAR)	Lef1	Tgfb3				Ets2
+Fgf9	Runx2	Dab2	Lrp1	Egfr	Fgf7	Egfr		Lrp1					Fosl1 (Fra-1)
+Gdf5 (Cdmp-1)	Six1	Dlk1	Mmp2 (Gelatinase A)	Fgf4	Fn1	Fosl1 (Fra-1)		Ppap2b					Klf5 (GC Box BP)
+Gdnf	Sox2	Efnb1	Mmp7 (Matrilysin)	Nrcam	Gdnf	Id2		Sfrp2					Myc
+Igf1	Sox9	Egfr	Mmp9 (Gelatinase B)	Sox9	Igf1	Igf1		Tle1					Nanog
+Igf2	T (Brachyury)	Fn1	Ptgs2 (Cox-2)		Il6	Igf2		Wisp1					Pitx2
+Il6		Fst	Wnt3a		Irs1	Myc		Wisp2					Pou5f1 (Oct4)
+Jag1		Gja1	Wnt5a		Jag1	Ptgs2 (Cox-2)		Wnt3a					Ppard
+Tgfb3		Id2	Wnt9a		Mmp9 (Gelatinase B)	Sox2		Wnt5a					Runx2
+Vegfa		Met			Nrcam			Wnt9a					Six1
+		Mmp9 (Gelatinase B)			Nrp1								Sox2
+		Nrcam			Pdgfra								Sox9
+		Nrp1			Ppap2b								T (Brachyury)
+		Ntrk2			Ppard								Tcf4
+		Pdgfra			Six1								
+		Smo			Smo								
+		Twist1			Twist1								
+					Vegfa								

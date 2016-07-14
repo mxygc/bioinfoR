@@ -1,0 +1,30 @@
+NFκB Pathway	NFκB Pathway	NFκB Pathway	NFκB Pathway	NFkB Responsive Genes	NFkB Responsive Genes	Other Factors Involved in the NF?B Pathway	Other Factors Involved in the NF?B Pathway	Other Factors Involved in the NF?B Pathway
+Ligands and Receptors	Downstream Signaling	Cytoplasmic Sequestering/Releasing of NF?B	Transcription Factors	Immune Response	Apoptosis	Kinases	Transcription Factors	Others
+Card10	Fadd	Bcl3	Nfkb1	Ccl2 (Mcp-1)	Agt	Akt1	Atf1	Bcl10
+Ccl2 (Mcp-1)	Myd88	Chuk (IKKa)	Nfkb2	Ccl5 (Rantes)	Bcl2a1	Eif2ak2 (Prkr)	Atf2	Card11
+Cd40 (Tnfrsf5)	Irak1	Ikbkb	Rel	Csf1 (MCSF)	Bcl2l1	Raf1	Crebbp	Casp1
+Csf2 (GM-CSF)	Irak2	Ikbke	Rela	Csf2 (GM-CSF)	Birc3 (c-IAP1)	Tbk1	Egr1	Casp8
+Egfr	Irak4	Ikbkg		Csf3 (GCSF)		Zap70	Fos	Cflar (Casper)
+F2r	Irf1	Nfkbia		Icam1			Jun	Hmox1
+Faslg (Tnfsf6)	LOC687813 (Traf1)			Ifng			Smad4	Pcaf
+Ifna1	Map2k3			Irf1				Psip1
+Ifng	Map3k1			Lta				Timp1
+Il10	Mapk3			Stat1				
+Il1a	Ripk1			Tnf				
+Il1b	Ripk2							
+Il1r1	Tollip							
+Lta	Tradd							
+Ltbr	Traf2							
+Tlr9	Traf3							
+Tnfrsf10b (DR5)	Traf6							
+Tnfrsf1a								
+Tnfrsf1b								
+Tlr1								
+Tlr2								
+Tlr3								
+Tlr4								
+Tlr6								
+Tlr9								
+Tnf								
+Tnfsf10								
+Tnfsf14								

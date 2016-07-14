@@ -1,0 +1,55 @@
+WNT Signaling Pathways	WNT Signaling Pathways	WNT Signaling Pathways	WNT Signaling Negative Regulation	WNT Signaling Target Genes	Developmental Processes	Developmental Processes	Developmental Processes	Cell Migration	Cell Cycle	Cellular Homeostasis
+Canonical	Planar Cell Polarity (PCP)	Wnt/Ca+2			Cell Fate	Tissue Polarity	Cell Growth & Profileration			
+Apc	Daam1	Fzd2	Apc	Axin2	Ctnnb1	Fzd2	Apc	Apc	Apc	Apc
+Axin1	Dvl1	Wnt1	Axin1	Btrc (bTrCP)	Dkk1	Fzd3	Ccnd1	Dkk1	Btrc (bTrCP)	Fzd2
+Axin2	Dvl2	Wnt10a	Axin2	Ccnd1	Dkk3	Fzd5	Ccnd2	Dkk3	Ccnd1	Jun
+Bcl9	Mapk8 (Jnk1)	Wnt10b	Btrc (bTrCP)	Ccnd2	Dkk4	Fzd6	Ctnnb1	Dkk4	Ccnd2	Myc
+Csnk1a1	Nkd1	Wnt11	Cby1	Dab2	Wnt1	Vangl2	Dab2	Lrp5	Ctnnb1	
+Csnk2a1	Nkd2	Wnt2	Ccnd1	Fosl1 (Fra-1)	Wnt3		Ep300	Lrp6	Ep300	
+Ctnnb1	Prickle1	Wnt2b	Dkk1	Jun	Wnt3a		Fgf4	Wnt1	Fosl1 (Fra-1)	
+Dixdc1	Rac1	Wnt3	Dkk3	Mitf			Fosl1 (Fra-1)		Jun	
+Dkk1	Rhoa	Wnt3a	Dkk4	Mmp7			Fzd3		Myc	
+Dkk3	Vangl2	Wnt4	Fbxw11	Myc			Jun		Rac1	
+Dkk4	Wnt9a	Wnt5a	Frzb (FRP-3)	Pitx2			Lrp5		Rhoa	
+Dvl1	Wnt9b	Wnt5b	Kremen1	Ppard			Mmp7		Tcfe2a	
+Dvl2		Wnt6	Kremen2	Wisp1			Myc		Tcf7l1	
+Ep300		Wnt7a	Lrp6				Ppard			
+Fzd1		Wnt7b	Nkd1				Wisp1			
+Fzd2		Wnt8a	Nkd2				Wnt3a			
+Fzd3		Wnt9a	RGD1561440 (Nlk)							
+Fzd4		Wnt9b	Sfrp1							
+Fzd5			Sfrp2							
+Fzd6			Sfrp4							
+Fzd7			Sfrp5							
+Fzd9			Tle1							
+Gsk3a			Wif1							
+Gsk3b										
+Lef1										
+Lrp5										
+Lrp6										
+Nkd1										
+Nkd2										
+Pygo2										
+Porcn										
+Sfrp1										
+Sfrp2										
+Sfrp4										
+Sfrp5										
+Tcfe2a										
+Tcf7l1										
+Tcf4										
+Tcf7										
+Wif1										
+Wnt1										
+Wnt10a										
+Wnt10b										
+Wnt2										
+Wnt2b										
+Wnt3										
+Wnt3a										
+Wnt4										
+Wnt6										
+Wnt7a										
+Wnt7b										
+Wnt8a										
+Wnt8b										

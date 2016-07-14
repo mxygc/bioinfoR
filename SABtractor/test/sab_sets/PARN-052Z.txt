@@ -1,0 +1,33 @@
+Innate Immunity	Innate Immunity	Innate Immunity	Adaptive Immunity	Adaptive Immunity	Adaptive Immunity	Adaptive Immunity	Adaptive Immunity	Adaptive Immunity	Adaptive Immunity	Humoral Immunity	Inflammatory Response	Defense Response to  Bacteria	Defense Response to  Viruses
+Pattern  Recognition Receptors	Cytokines	Other  Genes	Th1  Markers/Immune Response	Th2  Markers/Immune Response	Th17  Markers	Treg  Markers	T  Cell Activation	Cytokines	Other  Genes				
+Ddx58 (RIG-I)	Ccl12	Apcs	Ccr5	Ccr4	Ccr6	Ccr4	Cd1d1	Ccl12	Cd4	C3	Apcs	Camp	Cd4
+Nlrp3	Ccl3	C3	Cd80	Ccr8	Rorc	Ccr8	Cd80	Ccl3	Cd40 (Tnfrsf5)	C5ar1	C3	C5ar1	Cd40 (Tnfrsf5)
+Nod2	Ccl5  (Rantes)	C5ar1	Cxcr3	Cd86	Stat3	Foxp3	Cd86	Ccl5  (Rantes)	Cd40lg (Tnfsf5)	Ccl12	Ccl3	Ifnb1	Cd86
+Tlr1	Csf2 (GM-CSF)	Casp1 (Ice)	Ifng	Gata3		Il10	Icam1	Csf2 (GM-CSF)	Cd8a	Ccr6	Ccl5  (Rantes)	Ifng	Cd8a
+Tlr2	Cxcl10	Casp8 (Flice)	Il18	Ifnb1			Ifng	Cxcl10 (Inp10)	Crp	Crp	Crp	Il23a	Cxcl10 (Inp10)
+Tlr3	Ifna1	Cd14	Il23a	Il10			Il23a	Ifna1	Faslg (Tnfsf6)	Ifnb1	Foxp3	Il6	Ddx58 (RIG-I)
+Tlr4	Ifnb1	Cd4	Slc11a1	Il13			Il6	Ifng	Ifnar1	Ifng	Il1a	Lbp	Ifnar1
+Tlr5	Il18	Cd40 (Tnfrsf5)	Stat4	Il18			Slc11a1	Il10	Ifngr1	Il6	Il1b	Lyz2	Ifnb1
+Tlr6	Il1a	Cd40lg  (Tnfsf5)	Tbx21	Il4				Il13	Il1b	Mbl2	Il4	Mbl2	Il23a
+Tlr7	Il1b	Cd8a	Tlr4	Il5				Il18	Il1r1	Nod2	Il6	Myd88	Il6
+Tlr9	Il2	Crp	Tlr6	Il6				Il2	Irf3	Tnf	Mbl2	Nod2	Irf3
+	Tnf	Jun		Nod2				Il23a	Irf7		Stat3	Slc11a1	Nlrp3
+		Il1r1		Stat6				Il4	Itgam		Tnf	Tlr1	Tlr3
+		Irak1						Il5	Jak2			Tlr3	Tlr7
+		Irf3						Il6	Mapk8 (Jnk1)			Tlr4	
+		Irf7						Tnf	Mbl2			Tlr6	
+		Itgam							Mx2			Tlr9	
+		Lbp							Nfkb1			Tnf	
+		Lyz2							Rag1				
+		Mapk1 (Erk2)							Stat1				
+		Mapk14											
+		Mapk3											
+		Mapk8 (Jnk1)											
+		Mbl2											
+		Mpo											
+		Myd88											
+		Mx2											
+		Nfkb1											
+		Nfkbia (I?Ba/Mad3)											
+		Stat1											
+		Traf6											

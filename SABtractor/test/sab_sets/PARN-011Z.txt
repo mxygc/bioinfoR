@@ -1,0 +1,25 @@
+Chemokines	Chemokine Receptors	Interleukins	Interleukin Receptors	Other Cytokines	Other Cytokine Receptor
+					
+Ccl11 (Eotaxin)	Ccr1	Il11	Il10ra	Aimp1 (Scye1)	Tnfrsf11b
+Ccl12	Ccr10	Il13	Il1r1	Bmp2	
+Ccl17 (Tarc)	Ccr2	Il15	Il5ra (Cd125)	Cd40lg (Tnfsf5)	
+Ccl19	Ccr3	Il16	Il6r	Csf1 (Mcsf)	
+Ccl2 (Mcp-1)	Ccr4	Il17a	Il6st (Gp130)	Csf2 (Gm-Csf)	
+Ccl20 (Mip-3a)	Ccr5	Il17b	Cxcr1	Csf3 (Gcsf)	
+Ccl22	Ccr6	Il17f		Faslg (Tnfsf6)	
+Ccl24 (Eotaxin-2)	Ccr8	Il1a		Ifng	
+Ccl3 (Mip-1a)	Cx3cr1	Il1b		Lta (Tnfb)	
+Ccl4 (Mip-1b)	Cxcr2	Il1rn		Ltb	
+Ccl5 (Rantes)	Cxcr3	Il21		Mif	
+Ccl6	Cxcr5	Il27		Nampt	
+Ccl7 (Mcp-3)		Il2rb		Osm	
+Ccl9		Il2rg		Pf4	
+Cx3cl1		Il3		Spp1 (Osteopontin)	
+Cxcl1 (Cxcr1)		Il33		Tnf	
+Cxcl10 (Inp10)		Il4		Tnfsf10 (Trail)	
+Cxcl11 (I-Tac/Ip-9)		Il5		Tnfsf11	
+Cxcl12 (Sdf1)		Il7		Tnfsf13	
+Cxcl2				Tnfsf13b	
+Cxcl5 (Ena-78/Lix)				Tnfsf14	
+Cxcl9				Tnfsf4 (Ox40l)	
+RGD1561905 (C5)				Vegfa	

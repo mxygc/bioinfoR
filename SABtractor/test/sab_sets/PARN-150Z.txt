@@ -1,0 +1,28 @@
+Chemokines	Interleukins	Interferons	Growth Factors	TNF Superfamily	Other Cytokines	Anti-Inflammatory Cytokines
+						
+Ccl1 (I-309)	Il10	Ifna2	Bmp2	Cd40lg (Tnfsf5)	Adipoq	Ccl19
+Ccl11 (Eotaxin)	Il11	Ifng	Bmp4	Cd70 (Tnfsf7)	C5	Ccl21 (Mip-2)
+Ccl12	Il12a		Bmp6	Faslg  (Tnfsf6)	Ctf1	Il10
+Ccl17 (Tarc)	Il12b		Bmp7	Lta	Gdf15	Il11
+Ccl19	Il13		Cntf	Ltb	Mif	Il12a
+Ccl2 (Mcp-1)	Il15		Csf1  (MCSF)	Tnf	Spp1	Il12b
+Ccl20 (Mip-3a)	Il16		Csf2 (GM-CSF)	Tnfrsf11b	Tgfb2	Il13
+Ccl21 (Mip-2)	Il17a		Csf3 (GCSF)	Tnfsf10		Il18
+Ccl22 (Mdc)	Il17f		Gpi	Tnfsf11		Il2
+Ccl24 (Eotaxin-2)	Il18		Lif			Il22
+Ccl3 (Mip-1a)	Il1a		Mstn			Il23a
+Ccl4 (Mip-1b)	Il1b		Nodal			Il24
+Ccl5 (Rantes)	Il1rn		Osm			Il4
+Ccl7 (Mcp-3)	Il2		Thpo			Il6
+Cx3cl1	Il21		Vegfa			Tgfb2
+Cxcl1	Il22					
+Cxcl10 (Inp10)	Il23a					
+Cxcl11 (I-TAC/IP-9)	Il24					
+Cxcl12 (Sdf1)	Il27					
+Cxcl13	Il3					
+Cxcl16	Il4					
+Cxcl3	Il5					
+Cxcl9 (Mig)	Il6					
+Pf4	Il7					
+Ppbp	Il9					
+Xcl1						

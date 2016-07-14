@@ -1,0 +1,44 @@
+Somatic Stem Cell Maintenance	Placenta Development	Induced Pluripotent & Embryonic Stem Cells	Axis / Symmetry / Segmentation	Embryonic Development	Ectoderm, Endoderm, & Mesoderm Formation & Differentiation	Organ Morphogenesis	Angiogenesis	Neurogenesis	Hematopoiesis	Osteogenesis	Other
+											
+Cdx2	Cdx2	Lin28a	Cdx2	Cdx2	Foxa2 (Hnf3b)	Cdx2	Cdx2	Dlx1	Rb1	Esr1 (ERa)	Fosl1 (Fra1)
+Lif	Hand1	Nanog	Dlx1	Dlx1	Foxn1	Dlx1	Foxi2	Dlx2	Runx1 (Aml1)	Gata1	Htr7
+Nanog	Lif	Sox2	Dlx2	Dlx2	Gata6	Dlx2	Gbx2	Dnmt3b	Sox6	Hoxa2	Klk10
+Sox2	Pparg	Stat3	Ep300	Foxa2 (Hnf3b)	Hand1	Ep300	Hand1	Egr3	Sp1	Sox2	Pcna
+Tcf7l2	Sp1		Foxa2 (Hnf3b)	Foxp1	Hoxb13	Gbx2	Jun	Ezh2	Stat1	Sp1	Tert
+	Vdr		Foxp1	Gata1	Isl1	Hand1	Nr2f2	Fos	Tcfe2a		Xpc
+			Hoxa1	Gata6	Klf4	Hoxa1	Runx1 (Aml1)	Foxa1			
+			Hoxa11	Gbx2	Pax9	Hoxa2	Sox17	Foxa2 (Hnf3b)			
+			Hoxa2	Hand1	Runx2	Hoxb13	Tcf7l2	Foxp3			
+			Hoxa9	Hoxa2	Smad2	Hoxb3	Wt1	Gbx2			
+			Hoxb3	Hoxa9	Sox9	Hoxc4		Hoxa1			
+			Hoxc10	Hoxb3		Hoxd10		Hoxa2			
+			Hoxc4	Hoxc10		Hoxd4		Hoxc10			
+			Hoxc5	Hoxc4		Irx3		Hoxd10			
+			Hoxc6	Hoxc5		Isl1		Irx3			
+			Hoxd10	Hoxc6		Jun		Isl1			
+			Hoxd4	Hoxd10		Klf4		Lif			
+			Irx3	Hoxd4		Lif		Lmx1b			
+			Irx4	Klf2		Msx2		Neurod1			
+			Lmx1b	Klf4		Myc		Nkx2-2			
+			Neurod1	Lmx1b		Neurod1		Nr2f2			
+			Notch2	Msx2		Notch2		Olig2			
+			Nr2f2	Nanog		Nr2f2		Pax6			
+			Pax1	Neurod1		Pax1		Pitx3			
+			Pitx2	Notch2		Pax2		Pou4f1			
+			Smad2	Pax1		Pax6		Pou4f2			
+			Tbx5	Smad2		Pitx2		Pparg			
+			Tdgf1	Sox2		Pitx3		Sox14			
+			Zic1	Sox17		Pparg		Sox2			
+				Sp1		Runx1 (Aml1)		Stat3			
+				Tbx5		Smad2		Zic2 (Hpe5)			
+				Tcf7l2		Sox2					
+				Tdgf1		Sox9					
+				Zfpm2		Sp1					
+				Zic1		Stat3					
+				Zic2 (Hpe5)		Tbx5					
+						Tcf7l2					
+						Tdgf1					
+						Vdr					
+						Wt1					
+						Zfpm2					
+						Zic1					

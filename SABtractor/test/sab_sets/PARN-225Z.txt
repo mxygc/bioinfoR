@@ -1,0 +1,28 @@
+Cytokines & Chemokines	Inflammation	Inflammation	Apoptosis	Anti-Apoptosis	Immune Response	Immune Response	Immune Response	Type I Interferon-Responsive Genes	Development & Differentiation	Development & Differentiation	Development & Differentiation	Stress Response	NFkB Pathway	NFkB Pathway	Transcription Factors	Transcription Factors
+	Acute	Other Inflammatory Genes			Innate	Adaptive	Other Immunity-Related Genes		Lymphoid	Myeloid	Nervous System		Signal Transduction	Regulation	NFkB Signaling	Others
+Ccl11	C3	Agt	Agt	Adm	C3	C3	Cd83	Adm	Cd80	Ccl5 (Rantes)	Agt	Adm	Nfkb1	Birc2 (c-IAP2)	Nfkb1	Egr2
+Ccl12	C4a	Akt1	Birc2 (c-IAP2)	Akt1	C4a	C4a	Fas (Tnfrsf6)	Ccl12	Cd74	Csf1 (MCSF)	Aldh3a2	Akt1	Nfkb2	Cd40 (Tnfrsf5)	Nfkb2	Irf1
+Ccl22 (Mdc)	Ccl5 (Rantes)	Ccl11	Cd74	Bcl2a1 (Bfl-1/A1)	Ccl12	Ccl12	Faslg (Tnfsf6)	Ccl5 (Rantes)	Cd83	Csf2 (GM-CSF)	Cxcl1	Bcl2l1 (Bcl-x)	Nfkbia (IkBa/Mad3)	Faslg (Tnfsf6)	Rel	Mitf
+Ccl5 (Rantes)	Cfb (Bf)	Ccl12	Egfr	Bcl2l1 (Bcl-x)	Cfb (bf)	Cd40 (Tnfrsf5)	Il1r2	Cd80	Il12b	Csf2rb	Egfr	Birc2 (c-IAP2)	Stat1	Il1b	Rela	Myc
+Csf1 (MCSF)	F3	Ccl22 (Mdc)	Faslg (Tnfsf6)	Birc3 (c-IAP1)	Ifnb1	Cd74	Lta (Tnfb)	Cdkn1a (p21Cip1/Waf1)	Il15	Csf3 (GCSF)	Egr2	Ccnd1		Myd88		Nr4a2 (Nur77)
+Csf2 (GM-CSF)	F8	Ccr5	Gadd45b	Ccl12	Il12b	Cd80	Ltb	Cfb (BF)	Il2	Il4	Ifng	Cdkn1a (p21Cip1/Waf1)		Rel		Stat1
+Csf3 (GCSF)	Il1a	Cd40 (Tnfrsf5)	Ifnb1	Cdkn1a (p21Cip1/Waf1)	Il6	Icam1	Tnfsf10 (Trail)	Cxcl10 (Inp10)	Il2ra (Cd25)	Mitf	Nr4a2 (Nur77)	Gadd45b		Rela		Stat3
+Cxcl1	Il1b	Cxcl1	Ifng	Csf2 (GM-CSF)	Ins2	Ifng		Cxcl9 (Mig)	Il4	Mmp9 (Gelatinase B)	Snap25	Ifng		Tnf		Stat5b
+Cxcl10 (Inp10)	Il6	Cxcl10 (Inp10)	Il12b	F3	Myd88	Il12b		Il15	Irf1	Nfkbia (IkBa/Mad3)	Sod2	Il1a		Tnfsf10 (Trail)		Tp53
+Cxcl3	Ins2	Cxcl3	Il2ra (Cd25)	Fas (Tnfrsf6)	Nfkbia (IkBa/Mad3)	Il1b		Il1rn	Stat5b	Stat5b	Stat3	Il1b				
+Cxcl9 (Mig)	Stat3	Cxcl9 (Mig)	Il4	Il1a	Stat5b	Il2		Irf1	Tp53	Tnf	Tp53	Map2k6 (Mek6)				
+Faslg (Tnfsf6)	Stat5b	Il15	Ins2	Il1b	Tnf	Il4		Myd88	Vcam1			Nqo1				
+Ifnb1		Il1rn	Lta (Tnfb)	Il2		Traf2		Ncoa3				Pdgfb				
+Ifng		Il2	Map2k6 (Mek6)	Il6				Stat1				Plau (uPA)				
+Il12b		Il2ra (Cd25)	Mitf	Myd88				Tnfsf10 (Trail)				Sod2				
+Il15		Myd88	Mmp9 (Gelatinase B)	Nfkbia (IkBa/Mad3)								Tnf				
+Il1a		Ptgs2 (Cox-2)	Nqo1	Sod2								Tp53				
+Il1b		Sele	Nr4a2 (Nur77)	Stat5b								Xiap				
+Il1rn		Selp	Ptgs2 (Cox-2)	Tnf												
+Il2		Tnf	Stat1	Xiap												
+Il4		Tnfrsf1b	Tnfrsf1b													
+Il6			Tnfsf10 (Trail)													
+Lta (Tnfb)			Tp53													
+Ltb			Traf2													
+Tnf																
+Tnfsf10 (Trail)																

@@ -1,0 +1,22 @@
+Pluripotency Maintenance Pathway	Pluripotency Maintenance Pathway	Fibroblast Growth Factor (FGF) Signaling Pathway	Fibroblast Growth Factor (FGF) Signaling Pathway	Hedgehog Signaling Pathway	Hedgehog Signaling Pathway	Notch Signaling Pathway	Notch Signaling Pathway	TGF&beta Superfamily Signaling Pathway	TGF&beta Superfamily Signaling Pathway	Wnt Signaling Pathway	Wnt Signaling Pathway
+Receptors	Transcription Factor	Receptors	Transcription Factor	Receptors & Coreceptors	Transcription Factors & Cofactors	Receptors & Coreceptors	Transcription Factor	Receptors & Coreceptors	Transcription Factors & Cofactors	Receptors	Transcription Factors & Cofactors
+Il6st (Gp130)	Stat3	Fgfr1	Cdx2	Ptch1	Gli1	Ncstn	Rbpjl	Acvr1 (Alk2)	Crebbp	Fzd1	Bcl9
+Lifr		Fgfr2		Ptchd2	Gli2	Notch1		Acvr1b	E2f5	Fzd2	Bcl9l
+		Fgfr3		Smo	Gli3	Notch2		Acvr1c	Ep300	Fzd3	Ctnnb1
+		Fgfr4			Sufu	Notch3		Acvr2a	Rbl1	Fzd4	Lef1
+						Notch4		Acvr2b	Rbl2	Fzd5	Tcf7l2
+						Psen1		Acvrl1 (Alk1)	Smad1	Fzd6	Nfat5
+						Psen2		Amhr2	Smad2	Fzd7	Nfatc2
+						Psenen		Bmpr1a (Alk3)	Smad3	Fzd8	Nfatc3
+								Bmpr1b (Alk6)	Smad4	Fzd9	Nfatc4
+								Bmpr2	Smad5	Lrp5	Pygo2
+								Eng (Evi-1)	Smad6	Lrp6	RGD1560225 (Nfatc1)
+								Ltbp1	Smad7	Vangl2	Tcf7l1
+								Ltbp2	Smad9		Tcf7
+								Ltbp3	Sp1		
+								Ltbp4	Zeb2		
+								Rgma			
+								Tgfbr1 (Alk5)			
+								Tgfbr2			
+								Tgfbr3			
+								Tgfbrap1			

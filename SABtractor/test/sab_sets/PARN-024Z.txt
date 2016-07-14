@@ -1,0 +1,23 @@
+Angiogenic Factors	Angiogenic Factors	Angiogenic Factors	Angiogenic Factors	Other Factors Involved in Angiogenesis	Other Factors Involved in Angiogenesis	Other Factors Involved in Angiogenesis	Other Factors Involved in Angiogenesis	Other Factors Involved in Angiogenesis
+Growth Factors and Receptors	Adhesion Molecules	Proteases, Inhibitors and Other Matrix Proteins	Other Genes	Cytokines	Growth Factors and Receptors	Adhesion Molecules	Proteases, Inhibitors and Other Matrix Proteins	Other Genes
+Ang	Col18a1	Anpep	Epas1	Ccl2 (Mcp-1)	S1pr1	Cdh5	F2	Akt1
+Angpt1 (Agpt)	Ctgf	Col4a3	Hif1a	Cxcl1 (GRO)	Egf	Erbb2 (Her2)	Mmp14	Efna1
+Angpt2	Eng	F3	Mapk14	Cxcl2 (GRO2)	Hgf	Itgb3	Mmp2	Id1
+Bai1	Itga5	Fn1	Nos3	Cxcl9	Igf1	Nrp2	Mmp3	Lect1
+Col18a1	Itgav	Mmp19	Sphk1	Edn1	Itgb3	Pecam1	Mmp9	Ptgs1
+Ctgf	Nrp1	Serpinb5 (Maspin)		Ifna1	Lep	Ptk2	Plau (uPA)	Tie1
+Fgf1	Tek	Serpine1 (Pai-1)		Ifnb1	Mdk		Plg	
+Fgf2 (bFGF)	Thbs1	Serpinf1		Ifng	Nrp2		Timp1	
+Fgf6				Il1b	Pdgfa		Timp2	
+Fgfr3				Il6	Pdgfb		Timp3	
+Figf (Vegfd)				Tnf	Tgfa		Tymp	
+Flt1					Tgfb1			
+Itgav					Tgfb2			
+Jag1					Tgfb3			
+Kdr					Tgfbr1			
+Nrp1								
+Pgf								
+Tek								
+Vegfa								
+Vegfb								
+Vegfc								

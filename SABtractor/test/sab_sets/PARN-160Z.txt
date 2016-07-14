@@ -1,0 +1,39 @@
+NFκB Signaling	Cytokines	IL6/STAT3Signaling	IL6/STAT3Signaling	IL6/STAT3Signaling	IL6/STAT3Signaling	IL6/STAT3Signaling
+		STAT3Activators	Receptors	UpstreamSignaling	DownstreamSignaling	TargetGenes
+Ikbkb	Ccl12	Cxcl12 (Sdf1)	Cd4	Akt1	Bax	Ccl12
+Nfkb1	Ccl3 (Mip-1a)	Egfr	Cd40 (Tnfrsf5)	Jak2	Bcl2	Ccl5 (Rantes)
+Nfkbia (IκBα/Mad3)	Ccl4 (Mip-1b)	Il10	Cd80	Jak3	Cdc25a	Cd80
+Rela	Ccl5 (Rantes)	Il11	Csf3r (Gm-Csfr)	Map2k1 (Mek1)	Cdkn1a (p21Cip1/Waf1)	Cebpd
+Tlr4	Cd40lg (Tnfsf5)	Il17a	Cxcr4	Mapk1 (Erk2)	Hgf	Cxcl10 (Inp10)
+	Csf1 (Mcsf)	Il21	Fas (Tnfrsf6)	Mapk14	Met	Cxcl12
+	Csf2 (Gm-Csf)	Il23a	Il18r1	Mapk3 (Erk1)	Pim1	Il10
+	Csf3 (Gcsf)	Il6	Il1r1	Mapk8 (Jnk1)	Stat3	Il11
+	Cxcl3		Il2ra (Cd25)	Mtor		Il12a
+	Cxcl10 (Inp10)		Il6st (Gp130)	Myc		Il17a
+	Cxcl12(Sdf1)		Lifr	Pias3		Il1b
+	Faslg (Tnfsf6)		Osmr	Rac1		Il21
+	Il10		Tnfrsf10b(Dr5)	Socs1		Il6
+	Il11		Tnfrsf1a	Socs3		Myc
+	Il13		Tnfrsf1b	Src		Socs3
+	Il15			Tyk2		
+	Il18					
+	Il1a					
+	Il1b					
+	Il2					
+	IL20					
+	Il21					
+	Il22					
+	Il23a					
+	Il24					
+	Il3					
+	Il4					
+	Il5					
+	Il6					
+	Il7					
+	Il9					
+	Lif					
+	Lta(Tnfb)					
+	Osm					
+	Tnf					
+	Tnfsf10 (Trail)					
+	Tnfsf11					

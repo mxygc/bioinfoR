@@ -1,0 +1,19 @@
+Stem Cell Specific Markers	Stem Cell Specific Markers	Stem Cell Specific Markers	Stem Cell Specific Markers	Stem Cell Specific Markers	Stem Cell Specific Markers	Stem Cell Specific Markers	Stem Cell Specific Markers	Stem Cell Differentiation Markers	Stem Cell Differentiation Markers	Stem Cell Differentiation Markers	Stem Cell Differentiation Markers	Signaling Pathways Important for Stem Cell Maintenance	Signaling Pathways Important for Stem Cell Maintenance
+Cell Cycle Regulators	Chromosome and Chromatin Modulators	Genes Regulating Symmetric/Asymmetric Cell Division	Self-Renewal Markers	Cytokines and Growth Factors	Genes Regulating Cell-Cell Communication	Cell Adhesion Molecules	Metabolic Markers	Embryonic Cell Lineage Markers	Hematopoietic Cell Lineage Markers	Mesenchymal Cell Lineage Markers	Neural Cell Lineage Markers	Notch Pathway	Wnt Pathway
+Apc	Kat2a	Dhh	Hspa9	Bmp1	Dhh	Acan	Abcg2	Actc1	Cd19	Acan	Cd44	Dll1	Adar
+Axin1	Hdac1	Ihh	Kat8	Bmp2	Dll1	Apc	Aldh1a1	Ascl2	Cd3d	Alpi	Ncam1	Dll3	Apc
+Ccna2	Hdac2	Notch1	Kat7	Bmp3	Gja1	Bglap	Aldh2	Foxa2	Cd3e	Bglap	Sigmar1	Dtx2	Axin1
+Ccnd1	Kat8	Notch2	Neurog2	Cxcl12	Gjb1	Cd4	Fgfr1	Isl1	Cd4	Col1a1	S100b	Dvl1	Btrc
+Ccnd2	Kat7	Numb	Sox2	Fgf1	Jag1	Cd44		Krt15	Cd8a	Col2a1	Tubb3	Ep300	Ccnd1
+Ccne1	Rb1	Pard6a		Fgf2		Cdh1		Msx1	Cd8b	Col9a1		Kat2a	Fzd1
+Cdk1	Tert			Fgf3		Cdh2		Myod1	Mme	Pparg		Hdac1	Myc
+Cdc42				Fgf4		Catna1 (Ctnna1)		Pdx1 (Ipf1)				Hdac2	Ppard
+Ep300				Igf1		Cxcl12		T				Jag1	Wnt1
+Fgf1				Jag1		Ncam1						Notch1	
+Fgf2				LOC306312 (Gdf2)								Notch2	
+Fgf3				Gdf3 (Gdf3)								Numb	
+Fgf4													
+Myc													
+Notch2													
+Pard6a													
+Rb1													

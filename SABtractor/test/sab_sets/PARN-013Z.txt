@@ -1,0 +1,33 @@
+Cell Adhesion Molecules	Cell Adhesion Molecules	Cell Adhesion Molecules	Cell Adhesion Molecules	Extracellular Matrix (ECM) Proteins	Extracellular Matrix (ECM) Proteins	Extracellular Matrix (ECM) Proteins	Extracellular Matrix (ECM) Proteins	Extracellular Matrix (ECM) Proteins
+Transmembrane Molecules	Cell-Cell Adhesion	Cell-Matrix Adhesion	Other Adhesion Molecules	Basement Membrane Constituents	Collagens and ECM Structural Constituents	ECM Proteases	ECM Protease Inhibitors	Other ECM Molecules
+Cd44	Cdh1	Ctgf	Catna1	Col4a1	Col1a1	Adamts1	Col4a3	Vcan
+Cdh1	Icam1	Itga2	Ctnna2 (Catna2)	Col4a2	Col2a1	Adamts2	Timp1	Ctgf
+Cdh2	Vcam1	Itga3	Cntn1	Col4a3	Col3a1	Adamts5	Timp2	Ecm1
+Cdh3		Itga4	Ctnnb1 (Catnb)	Entpd1	Col4a1	Adamts8	Timp3	Emilin1
+Cdh4		Itga5	Col5a1	Itgb4	Col4a2	Mmp10		Fbln1
+Entpd1		Itgad	Col6a1	Lama1	Col4a3	Mmp11		Fn1
+Icam1		Itgae	Col8a1	Lama2	Col5a1	Mmp12		Postn
+Itga2		Itgal	Vcan	Lama3	Col6a1	Mmp13		Spock1
+Itga3		Itgam	Emilin1	Lamb2	Col8a1	Mmp14		Spp1
+Itga4		Itgav	Fn1	Lamb3	Hapln1	Mmp15		Tgfbi
+Itga5		Itgb1	Hapln1	Lamc1	Lama1	Mmp16		Thbs1
+Itgae		Itgb2	Lama1	Sparc		Mmp1		Tnc
+Itgal		Itgb3	Lama2	Timp1		Mmp2		
+Itgam		Itgb4	Lama3	Timp2		Mmp3		
+Itgav		Spp1	Lamb2	Timp3		Mmp7		
+Itgb1			Lamb3			Mmp8		
+Itgb2			Lamc1			Mmp9		
+Itgb3			Postn					
+Itgb4			Tgfbi					
+Mmp14			Thbs1					
+Mmp15			Thbs2					
+Mmp16			Vtn					
+Ncam1								
+Ncam2								
+Pecam1								
+Sele								
+Sell								
+Selp								
+Sgce								
+Syt1								
+Vcam1								

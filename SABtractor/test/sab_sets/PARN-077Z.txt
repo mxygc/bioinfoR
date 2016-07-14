@@ -1,0 +1,64 @@
+Cytokines	Cytokines	Cytokines	Cytokine Receptors	Cytokine Receptors	Cytokine Metabolism	Cytokine-Mediated Signaling Pathway	Acute-Phase Response	Chronic Inflammatory Response	Regulation of Inflammatory Response	Humoral Immune Response
+Chemokines	Interleukins	Other Cytokines	Cytokine Receptors	Chemokine Receptors						
+Ccl1	Il10	Cd40lg (Tnfsf5)	Il10rb	Ccr1	Il10	Ccl2 (Mcp-1)	Ccl5 (Rantes)	Ccl11 (Eotaxin)	Bcl6	C3
+Ccl11 (Eotaxin)	Il17a	Csf1 (MCSF)	Il1r1	Ccr2	Il18	Ccl5 (Rantes)	Ccr1	Ccl5 (Rantes)	C3	C4a
+Ccl12	Il18	Faslg (Tnfsf6)	Il1rap	Ccr3	Tlr1	Ccr1	Il1a	Il1b	C3ar1	Ccl2 (Mcp-1)
+Ccl17 (Tarc)	Il1a	Ifng	Il1rn	Ccr4	Tlr3	Ccr2	Il1b	Lta (Tnfb)	C4a	Ccl22 (Mdc)
+Ccl19	Il1b	Lta	Il23r	Ccr7	Tlr4	Ccr3	Il1rn	Tnf	Ccl1	Ccl3
+Ccl2 (Mcp-1)	Il1rn	Ltb	Il6r	Cxcr4	Tlr6	Ccr4	Il6		Ccl12	Ccl7 (Mcp-3)
+Ccl20	Il22	Tnf		Cxcr2 (Il8rb)		Ccr7	Ptgs2 (Cox2)		Ccl17 (Tarc)	Ccr2
+Ccl21 (Mip-2)	Il23a	Tnfsf14		Cxcr1		Cxcr2	Tnf		Ccl19	Ccr7
+Ccl22 (Mdc)	Il5					Cxcr4			Ccl2 (Mcp-1)	Cd40 (Tnfrsf5)
+Ccl24 (Eotaxin-2)	Il6					Il10rb			Ccl20	Il10
+Ccl25	Il7					Il1a			Ccl21 (Mip-2)	Il1b
+Ccl3 (Mip-1a)	Il9					Il1b			Ccl22 (Mdc)	Il6
+Ccl4 (Mip-1b)						Il1r1			Ccl24 (Eotaxin-2)	Itgb2
+Ccl5 (Rantes)						Il1rap			Ccl25	Ly96 (MD-2)
+Ccl6						Il1rn			Ccl3 (Mip-1a)	Nfkb1
+Ccl7 (Mcp-3)						Il23r			Ccl4 (Mip-1b)	Tnf
+Cxcl1						Il5			Ccl7 (Mcp-3)	
+Cxcl10 (Inp10)						Il6			Ccr2	
+Cxcl11						Il6r			Ccr3	
+Cxcl2						Myd88			Ccr4	
+Cxcl3						Ripk2			Ccr7	
+Cxcl5 (Ena78/Lix)						Tirap			Cd14	
+Cxcl9 (Mig)						Tnf			Cd40 (Tnfrsf5)	
+									Cd40lg (Tnfsf5)	
+									Cebpb	
+									Crp	
+									Csf1	
+									Cxcl1	
+									Cxcl10 (Inp10)	
+									Cxcl11	
+									Cxcl2	
+									Cxcl3	
+									Cxcl5 (Ena78/Lix)	
+									Cxcl9 (Mig)	
+									Cxcr2 (Il8rb)	
+									Cxcr4	
+									Fos	
+									Il10	
+									Il10rb	
+									Il1r1	
+									Il1rap	
+									Il22	
+									Cxcr1	
+									Il9	
+									Itgb2	
+									Kng1	
+									Ly96 (MD-2)	
+									Myd88	
+									Nfkb1	
+									Nos2 (iNOS)	
+									Nr3c1 (Grl)	
+									Ripk2	
+									Sele	
+									Tirap	
+									Tlr1	
+									Tlr2	
+									Tlr3	
+									Tlr4	
+									Tlr5	
+									Tlr6	
+									Tlr7	
+									Tollip	

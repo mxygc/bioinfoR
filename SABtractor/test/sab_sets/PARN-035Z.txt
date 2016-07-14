@@ -1,0 +1,29 @@
+TGFß Superfamily Ligands	TGFß Superfamily Ligands	TGFß Superfamily Ligands	TGFß Superfamily Ligands	TGFß Superfamily Ligands	TGFß Superfamily Receptors	TGFß Superfamily Receptors	TGFß Superfamily Receptors	Transcription Factors and Regulators	SMAD Target Genes	SMAD Target Genes	SMAD Target Genes	Adhesion and Extracellular Molecules	Adhesion and Extracellular Molecules	Genes Involving in Cellular and Developmental Processes	Genes Involving in Cellular and Developmental Processes	Genes Involving in Cellular and Developmental Processes	Genes Involving in Cellular and Developmental Processes	Genes Involving in Cellular and Developmental Processes	Genes Involving in Cellular and Developmental Processes
+Activin	BMP	Nodal	TGFβ	Inhibitor/Cofactors	Activin	BMP	TGFβ		TGFβ/Activin-Responsive	BMP-Responsive	Molecules Regulating Signaling of the TGF-ß Superfamily	Adhesion Molecules	Extracellular Matrix Structural Constituents	Apoptosis	Embryonic Development	Muscle Development	Neurogenesis	Reproduction	Skeletal Development
+Inha	Amh	Nodal	Tgfb1	Bambi	Acvr1 (Alk2)	Amhr2	Tgfbr1	Dlx2	Atf4	Bglap	Bambi	Bglap	Bglap	Cdkn1a (p21WAF1/p21CIP1)	Bmp4	Dcn	Dlx2	Amh	Bglap
+Inhba	Bmp1		Tgfb2	Chrd	Acvr2a	Bmpr1a (Alk3)	Tgfbr2	Fos	Cdkn1a (p21WAF1/p21CIP1)	Dlx2	Bmper	Eng (Evi-1)	Col1a1	Cdkn1b (p27KIP1)	Inhba	Igf1	Inha	Amhr2	Bmp1
+Inhbb	Bmp2		Tgfb3	Dcn	Acvrl1 (Alk1)	Bmpr1b (Alk6)	Tgfbr3	Gsc	Cdkn1b (p27KIP1)	Id1	Cdkn2b  (p15INK2B)	Tgfb1i1	Col1a2	Igfbp3	Mecom	Smad3	Inhba	Fst (Follistatin)	Bmp2
+	Bmp3			Fst		Bmpr2		Hipk2	Cdkn2b (p15INK2B)	Id2	Chrd	Tgfbi	Ltbp1	Inha	Smad3		Nog	Inha	Bmp3
+	Bmp4			Ltbp1				Id1	Col1a1	Junb	Eng (Evi-1)		Ltbp2	Inhba	Tdgf1			Inhba	Bmp4
+	Bmp5			Ltbp2				Jun	Col1a2	Sox4	Hipk2		Plat (tPA)	Stat1				Inhbb	Bmp5
+	Bmp6			Nog				Junb	Dcn	Stat1	Mecom		Tgfbi	Tgfb1					Bmp6
+	Bmp7			Tdgf1				Myc	Emp1		Fst (Follistatin)								Bmp7
+	Gdf3 (Vgr-2)			Tgfbi				Runx1 (Aml1)	Fos		Nog								Bmpr2
+	Gdf5 (Cdmp-1)			Tgfbrap1				Smad1 (Madh1)	Gadd45b		Plau  (uPA)								Chrd
+	Gdf6			Tgif1				Smad2 (Madh2)	Gsc		Runx1 (Aml1)								Col1a1
+	Gdf7			Thbs1				Smad3  (Madh3)	Herpud1										Col1a2
+								Smad4 (Madh4)	Ifrd1										Igf1
+								Smad5 (Madh5)	Igf1										Inha
+								Smad6	Igfbp3										Inhba
+								Smad7	Il6										Nog
+								Sox4	Jun										
+								Stat1	Junb										
+								Tgfb1i1	Myc										
+								Tsc22d1 (Tgfb1i4)	Pdgfb										
+									Plat (tPA)										
+									Serpine1 (Pai-1)										
+									Tgfb1i1										
+									Tnfsf10										
+									Tsc22d1 (Tgfb1i4)										
+									Tgfbi										
+									Tgif1										

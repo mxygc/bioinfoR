@@ -1,0 +1,32 @@
+Toll-Like Receptors	Pathogen-Specific  Responses	Pathogen-Specific  Responses	Pathogen-Specific  Responses	TLR Signaling	TLR Signaling	TLR Signaling	Downstream Pathways  and Target Genes	Downstream Pathways  and Target Genes	Downstream Pathways  and Target Genes	Downstream Pathways  and Target Genes	Downstream Pathways  and Target Genes	Regulation of Adaptive  Immunity	Adaptors & TLR  Interacting Proteins	Effectors
+	Bacterial	Viral	Fungal/Parasitic	Negative  Regulation	TICAM1  (TRIF)-Dependent (MYD88-Independent)	MYD88-Dependent	NFκB  Pathway	JNK/p38  Pathway	JAK/STAT Pathway	Interferon Regulatory Factor (IRF) Pathway	Cytokine-Mediated  Signaling Pathway			
+Cd180	Ccl2 (Mcp-1)	Ifnb1	Hras	Tollip	Irf3	Irak1	Btk	Fos	Ccl2 (Mcp-1)	Cxcl10 (Inp10)	Ccl2 (Mcp-1)	Cd80	Btk	Casp8 (Flice)
+Tlr1	Cd14	Ifng	Hspa1a (Hsp70 1a)		Tbk1	Irak2	Casp8	Il1B	Csf2 (GM-CSF)	Ifna1	Cebpb	Cd86	Cd14	Fadd
+Tlr2	Fos	Il12a	Tlr2		Map3k7 (Tak1)	Map3k7 (Tak1)	Chuk (Ikka)	Jun	Ifng	Ifnb1	Clec4e	Hspd1	Hmgb1	Irak1
+Tlr3	Hras	Il6			Nr2c2	Myd88	Fadd	Kcnh8 (Elk1)	Il12a	Ifng	Csf3 (GCSF)	Ifng	Hras	Irak2
+Tlr4	Il10	Irf3			PeIi1	Nr2c2	Ikbkb	Map2k3  (Mek3)	Il2	Irf1	Il1A	Il10	Hspa1a (Hsp70 1a)	Map3k7 (Tak1)
+Tlr5	Il12a	Tbk1			Rnf138 (Trif)	Tlr1	Il1r1	Map2k4 (Jnkk1)	Il6	Irf3	Il1b	Il12a	Hspd1	Nr2c2
+Tlr6	Il1b	Eif2ak2			Ticam2	Tlr2	Il10	Map3k1 (Mekk)		Tbk1	Il1r1	Il1b	Ly96 (MD-2)	Ppara
+Tlr7	Il6	Rela			Tlr3	Tlr4	Il1b	Map3k7			Il6	Il2	Mal	Eif2ak2
+Tlr9	Irak1	Rnf138 (Trif)			Tlr4	Tlr5	Irak1	Mapk8 (Jnk1)			Il6r	Map3k7	Mapk8ip3	Traf6
+	Hmgb1	Tlr3			Traf6	Tlr6	Irak2	Mapk8ip3			Irak1	Traf6	Myd88	Ube2n
+	Hspa1a (Hsp70 1a)	Tlr7				Tlr7	Irf3	Mapk9			Irak2		Peli1	Ube2v1
+	Jun	Tnf				Tlr9	Ly96	Tnf			Rela		Pglyrp1	
+	Lta  (Tnfb)					Traf6	Map3k1				Tnf		Ripk2	
+	Ly96						Map3k7				Tnfrsf1a		Rnf138 (Trif)	
+	Nfkbia (Ikba/Mad3)						Map4k4						Sarm1	
+	Pglyrp1						Nfkb1						Ticam2 (Tram)	
+	Ptgs2 (Cox2)						Nfkb2						Tollip	
+	Rela						Nfkbia (Ikba/Mad3)							
+	Ripk2						Nfkbib							
+	Rnf138  (Trif)						Nfkbil1							
+	Tlr2						Nfrkb							
+	Tlr4						Ppara							
+	Tlr6						Rel							
+	Tnfrsf1a						Rela							
+							Tnf							
+							Tnfrsf1a							
+							Tnip2 (Tnfaip3)							
+							Tradd							
+							Ube2n							
+							Ube2v1							

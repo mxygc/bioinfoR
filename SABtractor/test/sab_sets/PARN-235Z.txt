@@ -1,0 +1,31 @@
+Differentiation &  Development	Differentiation &  Development	Proliferation &  Migration	Proliferation &  Migration	Apoptosis	Anti-Apoptosis	Cell Cycle	Cell Cycle	Signal Transduction	Signal Transduction	Signal Transduction	Signal Transduction	Signal Transduction	Transcription Factors	Transcription Factors
+Regulation	Other  Genes	Regulation	Other  Genes			Regulation	Other  Genes	TGF                                              ß                                              Pathway	NF                                              ?                                              B  Pathway	Notch  Pathway	Hedgehog  Pathway	Wnt  Pathway	TGF                                              ß                                              Signaling	Others
+Agt	Brd2	Acvrl1 (Alk1)	Acta2 (a-SMA)	Acvr1 (Alk2)	Bcl2l1 (Bcl-x)	Acvr1 (Alk2)	Cdc6	Acvr1 (Alk2)	Hmox1	Hes1	Gli2	Ctnnb1	Crebbp (Cbp)	Ar
+Bdnf	Cebpb	Agt	Acvr1 (Alk2)	Agt	Bdnf	Rad21	Cdkn1b (p27Kip1)	Acvrl1 (Alk1)	Il10	Hey1	Shh		E2f5	Atf3
+Ctnnb1	Creb1	Atf3	Ar	Aipl1	Cebpb		Gadd45b	Crebbp (Cbp)	Map3k7 (Tak1)	Notch1			Ep300	Atf4
+Ephb2	Dnaja1	Bcl2l1 (Bcl-x)	Emp1	Cdkn1b (p27Kip1)	Cryab		Ptgs2 (Cox-2)	E2f5	Nfkbia (IkBa/Mad3)				Id1	Bach1
+Hes1	Emp1	Bdnf	Fn1	Creb1	Hmox1		Rhob	Eng (Evi-1)	RhoA				Id2	Bhlhe40
+Klf10	Eng (Evi-1)	Cdc6	Furin	Ctnnb1	Il10		Tgfb2	Ep300	Tnfsf10 (Trail)				Id3	Cebpb
+Nfkbia (IkBa/Mad3)	Fn1	Cdkn1b (p27Kip1)	Il10	Furin	Nfkbia (IkBa/Mad3)			Id1					Rbl1	Creb1
+PPara	Ifrd1	Ctnnb1	Ptk2	Gadd45b	Ptk2b			Id2					Smad1	Ctnnb1
+Pthlh	Mapk14 (p38 MAPK)	Furin		Herpud1	Thbs1			Id3					Smad3	Fos
+Ptk2	Mmp2 (Gelatinase A)	Hes1		Klf10	Vegfa			Msx2					Smad5	Gtf2I
+Rara	Myod1	Hmox1		Map3k7 (Tak1)				Rbl1					Smad6	Hey1
+Rhoa	Snai1	Il10		Mapk8 (Jnk1)				Smad1					Sp1	Klf10
+Runx1 (Aml1)		Klf10		Msx2				Smad3						Mbd1
+Shh		Msx2		Plg				Smad5						Msx2
+Tgfb2		Myc		Ptgs2 (Cox-2)				Smad6						Myc
+Tgfbr2		Nfkbia (IkBa/Mad3)		Rad21				SP1						Myod1
+		Pdgfa		Rhoa				Tgfb2						Nfib
+		Plg		Rhob				TgfbR2						Ppara
+		Ptgs2 (Cox-2)		Rybp				Thbs1						Rara
+		Pthlh		S100a8										Runx1 (Aml1)
+		Ptk2b		Shh										Sox4
+		Serpine1 (PAI-1)		Sox4										Srebf2
+		Shh		Tgfb2										
+		Sox4		Tnfsf10 (Trail)										
+		Tgfb2		Txnip										
+		Tgfbr2												
+		Thbs1												
+		Txnip												
+		Vegfa												

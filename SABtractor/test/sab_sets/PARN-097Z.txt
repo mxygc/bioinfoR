@@ -1,0 +1,48 @@
+Inflammasomes	Inflammasomes	Inflammasomes	Inflammasomes	Inflammasomes	Inflammasomes	NOD-Like Receptors	NOD-Like Receptors	Pro-Inflammatory Caspases
+AIM2	IPAF	Nlrp1a	NLRP3	Negative Regulation	Downstream Signaling	Receptors	Downstream Signaling	
+Casp1	Casp1	Casp1	Casp1	Bcl2	Ifng	Ciita	Birc2	Casp1
+Pycard (Asc)	Naip6	Nlrp1a	Nlrp3	Bcl2l1	Il12a	Naip6	Birc3	Casp12
+	Nlrc4 (Ipaf)		Pycard (Asc)	Cd40lg	Il12b	Nlrp12	Card6	
+	Pycard (Asc)			Ctsb	Il18	Nlrp5	Casp8	
+				Hsp90aa1	Il1b	Nlrc4	Ccl11	
+				Hsp90ab1	Il33	Nlrp1a	Ccl12	
+				Mefv	Irak1	Nlrp3	Ccl2	
+				Pstpip1	Irf1	Nlrp6	Ccl5	
+				Sugt1	Myd88	Nlrx1	Ccl7	
+				Tnf	P2rx7	Nod2	Cflar	
+				Tnfsf11	Panx1		Chuk	
+				Tnfsf14	Ptgs2		Cxcl3	
+				Tnfsf4	Mok		Cxcl1	
+				Hsp90b1	Ripk2		Fadd	
+					Txnip		Ifnb1	
+							Ikbkb	
+							Ikbkg	
+							Il6	
+							Irf1	
+							Irf2	
+							Irf3	
+							Irf4	
+							Irf5	
+							Irf6	
+							Map3k7	
+							Tab1	
+							Tab2	
+							Mapk1	
+							Mapk11	
+							Mapk12	
+							Mapk13	
+							Mapk14	
+							Mapk3	
+							Mapk8	
+							Mapk9	
+							Nfkb1	
+							Nfkbia	
+							Nfkbib	
+							Pea15	
+							Rela	
+							Ripk2	
+							Sugt1	
+							Tirap	
+							Tnf	
+							Traf6	
+							Xiap	

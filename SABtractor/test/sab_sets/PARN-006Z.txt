@@ -1,0 +1,29 @@
+Glucose Metabolism	Glucose Metabolism	Glucose Metabolism	Glucose Metabolism	Glucose Metabolism	Glycogen Metabolism	Glycogen Metabolism	Glycogen Metabolism
+Glycolysis	Gluconeogenesis	Regulation	TCA Cycle	Pentose Phosphate Pathway	Synthesis	Degradation	Regulation
+Aldoa	Fbp1	Pdk1	Acly	G6pd	Gys1	Agl	Gsk3a
+Aldob	Fbp2	Pdk2	Aco1	H6pd	Gys2	Pgm1	Gsk3b
+Aldoc	G6pc	Pdk3	Aco2	Pgls	Ugp2	Pgm2	Phka1
+Bpgm	G6pc3	Pdk4	Cs	Prps1		Pgm3	Phkb
+Eno1	Pc	Pdp2	Dlat	Prps1l1		Pygl	Phkg1
+Eno2	Pck1	Pdpr	Dld	Rbks		Pygm	Phkg2
+Eno3	Pck2		Dlst	Rpia			
+Galm			Fh	Taldo1			
+Gapdh			Idh1	Tkt			
+Gapdhs			Idh2				
+Gck			Idh3a				
+Gpi			Idh3b				
+Hk2			Idh3g				
+Hk3			Mdh1				
+Pfkl			Mdh1b				
+Pgam2			Mdh2				
+Pgk1			Ogdhl				
+Pgk2			Pdha2				
+Pgm1			Pdhb				
+Pgm2			Pdhx				
+Pgm3			Sdha				
+Pklr			Sdhb				
+Tpi1			Sdhc				
+			Sdhd				
+			Sucla2				
+			Suclg1				
+			Suclg2				

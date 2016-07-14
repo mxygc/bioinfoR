@@ -1,0 +1,26 @@
+NFKB Signaling Pathway	PARN-025Z
+NFKB Signaling Targets	PARN-225Z
+Inflammatory Cytokines & Receptors	PARN-011Z
+Cytokines & Chemokines	PARN-150Z
+Chemokines & Receptors	PARN-022Z
+TGFB Signaling Targets	PARN-235Z
+Mesenchymal Stem Cells	PARN-082Z
+Stem Cell	PARN-405Z
+Stem Cell Signaling	PARN-047Z
+Stem Cell Transcription Factors	PARN-501Z
+WNT Signaling Pathway	PARN-043Z
+WNT Signaling Targets	PARN-243Z
+Cell Motility	PARN-128Z
+Extracellular Matrix & Adhesion Molecules	PARN-013Z
+TGFB-BMP Signaling Pathway	PARN-035Z
+Angiogenesis	PARN-024Z
+Antibacterial Response	PARN-148Z
+Inflammasomes	PARN-097Z
+Toll-Like Receptor Signaling Pathway	PARN-018Z
+Inflammatory Response & Autoimmunity	PARN-077Z
+Innate & Adaptive Immune Responses	PARN-052Z
+Glycosylation	PARN-046Z
+Oxidative Stress	PARN-065Z
+Glucose Metabolism	PARN-006Z
+Mitochondrial Energy Metabolism	PARN-008Z
+IL6-STAT3 Signaling Pathway	PARN-160Z
