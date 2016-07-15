@@ -20,7 +20,7 @@ sub get_soap {
     # For new user registration, go to http://david.abcc.ncifcrf.gov/webservice/register.htm
     $check = $soap->authenticate($auth_email)->result;
     print "User authentication: $check\n";
-    die "email $auth_email not authenticated!\n" and exit unless ( lc($check) eq "true" );
+    die "email $auth_email not authenticated!\n" unless ( lc($check) eq "true" );
     open $inputH, "<", $input or croak "cannot open fine for input!";
     while( <$inputH> ) {
         $input_id .= $_;
