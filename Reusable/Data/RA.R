@@ -1,3 +1,5 @@
+if (!exists("RA") || !is.environment(RA)) RA <- new.env(parent = emptyenv())
+
 local({
     read.blood.mrna.celfile <- function(dir.in, samples, celfiles, save = FALSE, log2 = TRUE, dir.out = NULL) {
         require(affy)
