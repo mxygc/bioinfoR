@@ -1,21 +1,8 @@
 if (!exists("Enrichments") || !is.environment(Enrichments)) Enrichments <- new.env(parent = emptyenv())
 
 local({
-	
-    get.genesets <- function(file, sets = NULL, id = "offsym", type = "basic", map = NULL, uppercase = F) {
-    # the sheet is first letter capitalized only
-        genesets <- read.csv(file = file, head = T, as.is = T, check.names = F)
-        genesets <- lapply(genesets, function(x, uppercase) { x <- x[x != ""]; if (uppercase) x <- toupper(x); x <- unique(x) }, uppercase = uppercase)
-        if (is.null(sets)) sets <- sub(".MAJOR$", "", grep("MAJOR$", names(genesets), value = T))
-        sets.basic <- sets
-        sets.paralog <- paste(sets, "MAJOR", sep = ".")
-        genesets.basic <- sapply(sets.basic, function(s, genesets) list(basic = genesets[[s]], paralog = character(0)), genesets = genesets, simplify = F, USE.NAMES = T)
-        genesets.paralog <- sapply(sets.basic, function(s, genesets) list(basic = genesets[[s]], paralog = setdiff(genesets[[paste(s, "MAJOR", sep = ".")]], genesets[[s]])), genesets = genesets, simplify = F, USE.NAMES = T)
-        names(genesets.paralog) <- sets.paralog
-        genesets <- c(genesets.basic, genesets.paralog)
-    } 
-    
-    get.hpg <- function(s, bg, l, n = 3000, seed = 1, upper.case = T) {
+
+    get.hpg <- function(s, bg, l, n = 3000, seed = 1) {
         get.perm.lists <- function(bg, g, n){
         	lg <- length(g)
         	lbg <- length(bg)
@@ -28,466 +15,275 @@ local({
         	m <- sum(bg %in% s)
         	n <- sum(!bg %in% s)
         	k <- length(l)
-        	phyper(q = q - 1, m = m, n = n, k = k, lower.tail = F)
+        	phyper(q = q - 1, m = m, n = n, k = k, lower.tail = FALSE)
         }
-        if (is.list(s)) {
-            b <- s$basic
-            e <- s$paralog
-            i <- intersect(b, e)
-            if (any(i)) {
-                if (!setequal(i, b)) 
-                    warning("the extened list has some but not whole overlapping genes with the basic one")
-                s <- e
-                e <- setdiff(e, b)
-            }
-            else s <- union(b, e)
-        }
-        else {
-            b <- s
-            e <- character()
-        }
-      	bg <- unique(bg)
-       	l <- unique(l)
-       	s <- unique(s)
-        if (upper.case) {
-           	bg <- toupper(bg)
-        	l <- toupper(l)
-        	s <- toupper(s)
-            b <- toupper(b)
-            e <- toupper(e)
-        }
-    	ib <- paste(intersect(b, l), collapse = ";")
-        ie <- paste(intersect(e, l), collapse = ";")
+    	bg <- unique(bg)
+    	l <- unique(l)
+    	s <- unique(s)
+    	i <- paste(intersect(l, s), collapse = ";")
         if (length(l) > 0) {
         	p.real <- get.hypergeom.p(bg = bg, l = l, s = s)
-        	if (!missing(seed)) seed = seed
-            set.seed(seed)
-        	l.perms <- get.perm.lists(bg = bg, g = l, n = n)
-            if (n >= 1) {
-            	colnames(l.perms) <- paste("perm_", 1:n, sep = "")
+            if (n > 0) {
+        	    if (!missing(seed)) { seed = seed; set.seed(seed) }
+        	    l.perms <- get.perm.lists(bg = bg, g = l, n = n)
                 p.perms <- apply(l.perms, 2, function(l.perm, bg, s) get.hypergeom.p(bg = bg, l = l.perm, s = s), bg = bg, s = s)
-            } else p.perms <- NULL
+            } else 
+                p.perms <- rep(NA, n)
         } else {
             p.real <- NA
             p.perms <- rep(NA, n)
+            i <- ""
         }
-    	list(p = p.real, p.perms = p.perms, basic = ib, paralog = ie)
+    	list(p = p.real, p.perms = p.perms, i = i)
     }
     
-    get.hypergeom <- function(genes, mods = NULL, genesets, bg, n = 3000, seed = 1, correct.methods = c("BH", "BY", "Holm", "Hochberg", "Hommel", "Bonferroni", "bootstrap"), correct = "row", sep.prlg = FALSE, upper.case = TRUE, fun.get.hpg = get.hpg) {
-    # for each comparison: genes = list(mod_1 = character(), mod_2 = character(), ...)
-    # if paralog = F, intersection = c(intersect(l, s))
-    # else, intersection = c(intersect(l, s), intersect(e, s))
-    # correct defines way to do multiple correction: NULL (no correction), by row, col, or both
-        if (is.null(mods)) mods <- names(genes)
-        hpg <- NULL
+    get.hypergeom <- function(degs, genesets, bg, cl = NULL, n = 3000, seed = 1, cmps = NULL, mc.methods = c("bh", "by", "hlm", "hcbg", "hmml", "bfrn", "btsp"), mc.way = "row") {
+    ##degs = list(cmp1 = vector(genes), cmp2 = vector(genes), ...)
+    ##genesets = list(set1 = vectors(genes), set2 = vector(geens))
+    ##multicorrect.method defines way to do correction: by row, col, or both
+        hypergeoms <- NULL
         hpgs <- NULL
-        nrow <- length(mods)
-        ncol <- length(genesets)
+        if (is.null(cmps)) cmps <- names(degs)
+        ncmp <- length(cmps)
+        nset <- length(genesets)
         sets <- names(genesets)
         p.perms <- list()
-        p <- matrix(NA, nrow, ncol, dimnames = list(mods, sets))
-        basic <- matrix("", nrow, ncol, dimnames = list(mods, sets))
-        paralog <- basic
-        overlap <- basic
-        hpg.mc <- NULL
-        get.mc <- function(method, p, mods, sets, p.perms = NULL, correct = "row") {
-            .methods <- c(BH = "BH", BY = "BY", Holm = "holm", Hochberg = "hochberg", Hommel = "hommel", Bonferroni = "bonferroni", bootstrap = "bootstrap")
+        hypergeoms$p <- matrix(NA, nrow = ncmp, ncol = nset, dimnames = list(cmps, sets))
+        hypergeoms$i <- matrix("", nrow = ncmp, ncol = nset, dimnames = list(cmps, sets))
+        get.mc <- function(method, p, cmps, sets, ncmp, nset, p.perms = NULL, way = "both") {
+            .methods <- c(bh = "BH", by = "BY", hlm = "holm", hcbg = "hochberg", hmml = "hommel", bfrn = "bonferroni", btsp = "bootstrap")
             m <- .methods[method]
             if (m != "bootstrap") {
-                if (correct == "both") {
+                if (way == "both") {
                     mc <- as.vector(p)
                     mc <- p.adjust(mc, method = m)
-                    mc <- matrix(mc, length(mods), length(sets))
-                    colnames(mc) <- sets
-                } 
-                else if (correct == "row") {
+                    mc <- matrix(mc, nrow = ncmp, ncol = nset, dimnames = list(cmps, sets))
+                } else if (way == "row") {
                     mc <- t(apply(p, 1, p.adjust, method = m))
-                }
-                else if (correct == "col") {
+                } else if (way == "col") {
                     mc <- apply(p, 2, p.adjust, method = m)
                 }
-            } 
-            else {
-                if (is.null(p.perms)) 
-                    stop("permutation derived p values don't exist")
+            } else {
+                if (is.null(p.perms)) stop("permutation derived p values don't exist")
                 mc <- p
-                p.perm <- list()
-                if (correct == "both")
+                p.perm <- NULL
+                if (way == "both") 
                     p.perm <- unlist(p.perms)
-                else if (correct == "row")
-                    for (mod in mods) p.perm[[mod]] <- unlist(p.perms[[mod]])
-                else if (correct == "col") {
-                    for (set in sets) for (mod in mods) p.perm[[set]] <- c(p.perm[[set]], p.perms[[mod]][[set]])
+                else if (way == "row")
+                    p.perm <- lapply(cmps, function(cmp) unlist(p.perms[[cmp]]))
+                else if (way == "col") {
+                    p.perm <- lapply(sets, function(set) unlist(lapply(cmps, function(cmp) p.perms[[cmp]][[set]])))
                 }
-                for (mod in mods) 
+                for (cmp in cmps) 
                     for (set in sets) {
-                        if (correct == "both")
-                            mc[mod, set] <- mean(p.perm <= p[mod, set], na.rm = T)
-                        else if (correct == "row")
-                            mc[mod, set] <- mean(p.perm[[mod]] <= p[mod, set], na.rm = T)
-                        else if (correct == "col")
-                            mc[mod, set] <- mean(p.perm[[set]] <= p[mod, set], na.rm = T)
+                        if (way == "both")
+                            mc[cmp, set] <- mean(p.perm <= p[cmp, set], na.rm = T)
+                        else if (way == "row")
+                            mc[cmp, set] <- mean(p.perm[[cmp]] <= p[cmp, set], na.rm = T)
+                        else if (way == "col")
+                            mc[cmp, set] <- mean(p.perm[[set]] <= p[cmp, set], na.rm = T)
                     }
             }
             mc
         }
-        if (is.null(correct)) n <- 0
-        for (mod in mods) {
-            gene <- genes[[mod]]
-            cat(mod, "\n")
-            hpg <- c(hpg, list(sapply(genesets, fun.get.hpg, bg = bg, l = gene, n = n, seed = seed, upper.case = upper.case, USE.NAMES = T, simplify = F)))
-            names(hpg)[length(hpg)] <- mod
-        }
-        for (mod in mods) {
-            for (set in sets) {
-                p[mod, set] <- hpg[[mod]][[set]][["p"]]
-                basic[mod, set] <- hpg[[mod]][[set]][["basic"]]
-                paralog[mod, set] <- hpg[[mod]][[set]][["paralog"]]
-                overlap[mod, set] <- ifelse(paralog[mod, set] == "", basic[mod, set], paste(basic[mod, set], paralog[mod, set], sep = ";"))
-                if (!is.null(correct)) p.perms[[mod]][[set]] <- hpg[[mod]][[set]][["p.perms"]]
-            }
-        } 
-        if (!is.null((correct))) hpg.mc <- sapply(correct.methods, get.mc, p = p, mods = mods, sets = sets, p.perms = p.perms, correct = correct, USE.NAMES = T, simplify = F)
-        if (sep.prlg) hpgs <- c(list(p = p), hpg.mc, list(basic = basic), list(paralog = paralog))
-        else hpgs <- c(list(p = p), hpg.mc, list(overlap = overlap))
-        rownames <- paste(rep(mods, each = length(hpgs)), names(hpgs), sep = "_")
-        hypergeom <- matrix("", length(rownames), length(sets), dimnames = list(rownames, sets))
-        for (mod in mods)
-            for (set in sets)
-                for (r in names(hpgs)) {
-                    rowname <- paste(mod, r, sep = "_")
-                    hypergeom[rowname, set] <- hpgs[[r]][mod, set]
-                }
-        hypergeom
-    }
-    
-    # use parallel computing for percs
-    get.hypergeoms <- function(genes, nregs = NULL, regs = NULL, percs = NULL, mods = NULL, genesets, bg, n = 3000, seed = 1, correct.methods = c("BH", "BY", "Holm", "Hochberg", "Hommel", "Bonferroni", "bootstrap"), correct = "row", sep.prlg = FALSE, parallel = FALSE, cl = NULL, upper.case = TRUE, fun.get.hypergeom = get.hypergeom, fun.get.hpg = get.hpg) {
-        if (is.null(nregs)) nregs <- names(genes)
-        if (is.null(regs)) regs <- names(genes[[1]])
-        if (is.null(percs)) percs <- names(genes[[1]][[1]])
-        if (is.null(mods)) mods <- names(genes[[1]][[1]][[1]])
-        hypergeoms <- NULL
-        if (parallel) {
-            require("parallel")
-            cl <- makeCluster(length(percs))
-        }
-        for (nreg in nregs)
-            for (reg in regs) {
-                cat(nreg, reg, "\n")
-                gene <- genes[[nreg]][[reg]]
-                if (parallel && !is.null(cl)) {
-                    hypergeoms[[nreg]][[reg]] <- parSapply(cl, percs, function(perc, gene, mods, genesets, bg, n, seed, correct.methods, correct, sep.prlg, upper.case, fun.get.hypergeom, fun.get.hpg) { g <- gene[[perc]]; fun.get.hypergeom(g, mods = mods, genesets = genesets, bg = bg, n = n, seed = seed, correct.methods = correct.methods, correct = correct, sep.prlg = sep.prlg, upper.case = upper.case, fun.get.hpg = fun.get.hpg) }, gene = gene, mods = mods, genesets = genesets, bg = bg, n = n, seed = seed, correct.methods = correct.methods, correct = correct, sep.prlg = sep.prlg, upper.case = upper.case, fun.get.hypergeom = fun.get.hypergeom, fun.get.hpg = fun.get.hpg, USE.NAMES = T, simplify = F)
-                } else {
-                    hypergeoms[[nreg]][[reg]] <- sapply(percs, FUN = function(perc, gene, mods, genesets, bg, n, seed, correct.methods, correct, sep.prlg, upper.case, fun.get.hpg) { cat(perc, "\n"); g <- gene[[perc]]; get.hypergeom(g, mods = mods, genesets = genesets, bg = bg, n = n, seed = seed, correct.methods = correct.methods, correct = correct, sep.prlg = sep.prlg, upper.case = upper.case, fun.get.hpg = fun.get.hpg) }, gene = gene, mods = mods, genesets = genesets, bg = bg, n = n, seed = seed, correct.methods = correct.methods, correct = "row", sep.prlg = sep.prlg, upper.case = upper.case, fun.get.hpg = fun.get.hpg, USE.NAMES = T, simplify = F)
+        rearrange <- function(hpgm, methods, cmps, sets, nset) {
+            rns <- c("p", methods, "i")
+            nrn <- length(rns)
+            hpg <- matrix("", nrow = nrn, ncol = nset, dimnames = list(rns, sets))
+            hpgs <- NULL
+            for (cmp in cmps) {
+                for (rn in rns) {
+                    for (set in sets) {
+                        hpg[rn, set] <- hpgm[[rn]][cmp, set]
                     }
                 }
-        if (parallel && !is.null(cl)) stopCluster(cl)
-        hypergeoms
-    }
-    get.hypergeoms.rep <- function(genes, reps = NULL, nregs = NULL, regs = NULL, percs = NULL, mods = NULL, genesets, bg, n = 3000, seed = 1, correct.methods = c("BH", "BY", "Holm", "Hochberg", "Hommel", "Bonferroni", "bootstrap"), correct = "row", sep.prlg = FALSE, parallel = TRUE, cl = NULL, upper.case = TRUE, get.hypergeom = get.hypergeom, get.hpg = get.hpg) {
-        if (is.null(reps)) reps <- names(genes)
-        if (is.null(nregs)) nregs <- names(genes[[1]])
-        if (is.null(regs)) regs <- names(genes[[1]][[1]])
-        if (is.null(percs)) percs <- names(genes[[1]][[1]][[1]])
-        if (is.null(mods)) mods <- names(genes[[1]][[1]][[1]][[1]])
-        hypergeoms <- NULL
-        for (rp in reps) {
-            cat(rp, "\n")
-            gene <- genes[[rp]]
-            hypergeoms[[rp]] <- get.hypergeoms(gene, nregs = nregs, regs = regs, percs = percs, mods = mods, genesets = genesets, bg = bg, n = n, seed = seed, correct.methods = correct.methods, correct = correct, sep.prlg = sep.prlg, parallel = parallel, cl = cl, upper.case = upper.case, get.hypergeom = get.hypergeom, get.hpg = get.hpg)
+                hpgs <- c(hpgs, list(hpg))
+                names(hpgs)[length(hpgs)] <- cmp
             }
-        hypergeoms
+            hpgs
+        }
+        for (cmp in cmps) {
+            deg <- degs[[cmp]];
+            cat(cmp, "\n")
+            if (!is.null(cl))
+                hpgs <- c(hpgs, list(parSapply(cl, genesets, get.hpg, bg = bg, l = deg, n = n, seed = seed, USE.NAMES = T, simplify = F)))
+            else 
+                hpgs <- c(hpgs, list(sapply(genesets, get.hpg, bg = bg, l = deg, n = n, seed = seed, USE.NAMES = T, simplify = F)))
+            names(hpgs)[length(hpgs)] <- cmp
+        }
+        for (cmp in cmps) {
+            for (set in sets) {
+                hypergeoms$p[cmp, set] <- hpgs[[cmp]][[set]][["p"]]
+                hypergeoms$i[cmp, set] <- hpgs[[cmp]][[set]][["i"]]
+                p.perms[[cmp]][[set]] <- hpgs[[cmp]][[set]][["p.perms"]]
+            }
+        }
+        hypergeoms.mc <- sapply(mc.methods, get.mc, p = hypergeoms$p, cmps = cmps, sets = sets, ncmp = ncmp, nset = nset, p.perms = p.perms, way = mc.way, USE.NAMES = T, simplify = F)
+        hypergeoms <- c(hypergeoms, hypergeoms.mc)
+        hypergeoms <- rearrange(hpgm = hypergeoms, methods = mc.methods, cmps = cmps, sets = sets, nset = nset)
+        rownames <- paste(rep(cmps, each = 2 + length(mc.methods)), c("p", mc.methods, "i"), sep = ".")
+        hypergeoms.df <- do.call(rbind, hypergeoms)
+        rownames(hypergeoms.df) <- rownames
+        hypergeoms.df
     }
     
-    get.hpg.sigset <- function(hpg, mods = NULL, pval = 0.05, overlap = F) {
-        if (is.null(mods)) {
-            rnames <- rownames(hpg)
-            mods <- paste("mod", sort(as.numeric(unique(unlist(lapply(strsplit(rnames, "_"), function(x) x[2]))))), sep = "_")
-        }
-        get.hpg.ss <- function(mod, hpg, pval, overlap) {
-            sn <- colnames(hpg)
-            rp <- paste(mod, "p", sep = "_")
-            ri <- paste(mod, "overlap", sep = "_")
-            p <- hpg[rp, ]
-            i <- hpg[ri, ]
-            idx <- which(p < pval)
-    #       if (any(idx)) sigset <- paste(sn[idx], " (", p[idx], ":", i[idx], ")", collapse = "; ", sep = "")
-            if (overlap) {
-                if (any(idx)) sigset <- paste(sn[idx], " (", i[idx], ")", collapse = "; ", sep = "")
-                else sigset <- ""
-            } else {
-                if (any(idx)) sigset <- paste(sn[idx], collapse = "; ")
-                else sigset <- ""
-            }
-            sigset
-        }
-        sigset <- sapply(mods, get.hpg.ss, hpg = hpg, pval = pval, overlap = overlap, simplify = T, USE.NAMES = T)
+    prepare.expr <- function(expr, annot.map, dir.out) {
+    # There are GCT, RES, PCL, TXT 4 kinds of expression formats
+    # here just use TXT
+        affy <- rownames(expr)
+        offsym <- annot.map[affy]
+        expr.df <- data.frame(NAME = affy, DESCRIPTION = offsym, expr, stringsAsFactors = F)
+        dir.create(dir.out, recursive = T, showWarnings = F)
+        file.out <- file.path(dir.out, "expr.txt")
+        write.table(file = file.out, expr.df, sep = "\t", row.names = F, quote = F)
     }
-    get.hpg.sigsets <- function(hpgs, nregs = NULL, regs = NULL, percs = NULL, mods = NULL, pval = 0.05, overlap = F) {
-        if (is.null(nregs)) nregs <- names(hpgs)
-        if (is.null(regs)) regs <- names(hpgs[[1]])
-        if (is.null(percs)) percs <- names(hpgs[[1]][[1]])
-        if (is.null(mods)) {
-            rnames <- rownames(hpgs[[1]][[1]][[1]])
-            mods <- paste("mod", sort(as.numeric(unique(unlist(lapply(strsplit(rnames, "_"), function(x) x[2]))))), sep = "_")
+    prepare.exprs <- function(exprs, batches, annot.map, dir.out) {
+        for (batch in batches) {
+            dout <- file.path(dir.out, batch)
+            expr <- exprs[[batch]]
+            prepare.expr(expr, annot.map, dout)
         }
-        sigsets <- NULL
-        for (nreg in nregs)
-            for (reg in regs)
-                for (perc in percs) {
-                    cat(nreg, reg, perc, "\n")
-                    sigsets[[nreg]][[reg]][[perc]] <- get.hpg.sigset(hpgs[[nreg]][[reg]][[perc]], mods = mods, pval = pval, overlap = overlap)
-                }
-        sigsets
     }
+    prepare.phenotype <- function(expr, dir.out, new.label = TRUE) {
+    # CLS format
+        samples <- colnames(expr)
+        groups <- Labels$get.groups(samples, new.label)
+        dir.create(dir.out, recursive = T, showWarnings =  F)
+        file <- file.path(dir.out, "pheno.cls")
+        nsample <- length(samples)
+        ngroup <- length(unique(groups))
+        l1 <- paste(nsample, ngroup, 1)
+        l2 <- paste("#", paste(unique(groups), collapse = " "))
+        l3 <- paste(groups, collapse = " ")
+        lines <- paste(l1, l2, l3, sep = "\n")
+        cat(file = file, lines)
+    }
+    prepare.phenotypes <- function(exprs, batches, dir.out, new.label = TRUE) {
+        for (batch in batches) {
+            expr <- exprs[[batch]]
+            dout <- file.path(dir.out, batch)
+            prepare.phenotype(expr, dout, new.label)
+        }
+    }
+    prepare.genesets <- function(genesets, sets = NULL, file.out = "genesets.gmx", dir.out) {
+    # gmx format
+        dir.create(dir.out, recursive = T, showWarnings = F)
+        if (is.null(sets)) sets <- colnames(genesets)
+        gsets <- genesets[, sets, drop = F]
+        gsets <- lapply(gsets, function(x) { x <- x[x != ""]; x <- toupper(x); x <- unique(x); x <- c("", x) })
+        gsets <- list2dataframe(gsets, "")
+        file <- file.path(dir.out, file.out)
+        write.table(gsets, file = file, sep = "\t", quote = F, row.names = F)
+    }
+    prepare.annot <- function(annot.map, file.out = "annot.chip", dir.out) {
+        dir.create(dir.out, recursive = T, showWarnings = F)
+        file <- file.path(dir.out, file.out)
+        affy <- names(annot.map)
+        offsym <- toupper(unname(annot.map))
+        annot <- data.frame("Probe Set ID" = affy, 
+                            "Gene Symbol" = offsym,
+                            "Gene Title" = "na",
+                            check.names = F)
+        write.table(file = file, annot, row.names = F, sep = "\t", quote = F)
+    }
+    # for permutation by label (phenotype), the number of replicates in any group should be >= 3
+    run.gsea <- function(memsize = 2000, res, cls, gmx, comparison, chip = "ftp.broadinstitute.org://pub/gsea/annotations/Rat230_2.chip", collapse = TRUE, nperm = 10000, permute = "phenotype", rnd_type = "no_balance", seed = "timestamp", set_max = 500, set_min = 5, plot_top_x = 20, norm = "meandiv", save_rnd_lists = FALSE, median = FALSE, num = 100, scoring_scheme = "weighted", make_sets = TRUE, mode = "Max_probe", metric = "Signal2Noise", order = "descending", include_only_symbols = TRUE, sort = "real", zip_report = FALSE, run = T, verbose = F, dir.out) { 
+        cmp <- sub("2", "_versus_", comparison)
+        cls = paste(cls, "#", cmp, sep = "")
+        dir.create(dir.out, recursive = T, showWarnings = F)
+        command = paste("java", paste("-Xmx", memsize, "m", sep = ""), 
+    					"-cp",
+    					"~/Applications/GSEA/gsea2-2.0.10.jar",
+    					"xtools.gsea.Gsea", 
+    					"-res", res, 
+    					"-cls", cls,
+    					"-gmx", gmx,
+    					"-chip", chip,
+    					"-collapse", ifelse(collapse, "true", "false"),
+    					"-nperm", nperm,
+    					"-permute", permute,
+    					"-rpt_label", comparison,
+    					"-rnd_seed", seed, 
+    					"-save_rnd_lists", ifelse(save_rnd_lists, "true", "false"),
+    					"-set_max", set_max, 
+    					"-set_min", set_min,
+                        "-plot_top_x", plot_top_x, 
+                        "-norm", norm, 
+                        "-median", ifelse(isTRUE(median), "true", "false"), 
+                        "-num", num, 
+                        "-scoring_scheme", scoring_scheme,
+                        "-make_sets", ifelse(make_sets, "true", "false"),  
+                        "-mode", mode, 
+                        "-metric", metric, 
+                        "-order", order, 
+                        "-include_only_symbols", ifelse(include_only_symbols, "true", "false"), 
+                        "-sort", sort, 
+    					"-zip_report", ifelse(zip_report, "true", "false"), 
+    					"-gui", "false", 
+    					"-out", dir.out
+    					)
+    	if (verbose) print(command)
+    	if (run) system(command)
+    }
+    run.gsea.batch <- function(memsize = 2000, res, cls, gmx, comparisons, chip = "ftp.broadinstitute.org://pub/gsea/annotations/Rat230_2.chip", collapse = TRUE, nperm = 10000, permute = "phenotype", rnd_type = "no_balance", seed = "timestamp", set_max = 500, set_min = 5, plot_top_x = 20, norm = "meandiv", save_rnd_lists = FALSE, median = FALSE, num = 100, scoring_scheme = "weighted", make_sets = TRUE, mode = "Max_probe", metric = "Signal2Noise", order = "descending", include_only_symbols = TRUE, sort = "real", zip_report = FALSE, run = T, verbose = F, dir.out) {
+        for (comparison in comparisons)
+            run.gsea(memsize = memsize, res = res, cls = cls, gmx = gmx, comparison = comparison, chip = chip, collapse = collapse, nperm = nperm, permute = permute, rnd_type = rnd_type, seed = seed, set_max = set_max, set_min = set_min, plot_top_x = plot_top_x, norm = norm, save_rnd_lists = save_rnd_lists, median = median, num = num, scoring_scheme = scoring_scheme, make_sets = make_sets, mode = mode, metric = metric, order = order, include_only_symbols = include_only_symbols, sort = sort, zip_report = zip_report, run = run, verbose = verbose, dir.out = dir.out)
+    }
+    run.gsea.batches <- function(memsize = 2000, file.res = "expr.txt", file.cls = "pheno.cls", file.chip, file.gmx, comparisons.batch, batches, collapse = TRUE, nperm = 10000, permute = "phenotype", rnd_type = "no_balance", seed = "timestamp", set_max = 500, set_min = 5, plot_top_x = 20, norm = "meandiv", save_rnd_lists = FALSE, median = FALSE, num = 100, scoring_scheme = "weighted", make_sets = TRUE, mode = "Max_probe", metric = "Signal2Noise", order = "descending", include_only_symbols = TRUE, sort = "real", zip_report = FALSE, run = T, verbose = F, dir.in, dir.out) {
+        for (batch in batches) {
+            bat <- strsplit(batch, "\\.")[[1]][1]
+            comparisons <- comparisons.batch[[bat]]
+            din <- file.path(dir.in, batch)
+            res <- file.path(din, file.res)
+            cls <- file.path(din, file.cls)
+            dout <- file.path(dir.out, permute, batch)
+            dir.create(dout, recursive = T, showWarnings = F)
+            run.gsea.batch(memsize = memsize, res = res, cls = cls, gmx = file.gmx, comparisons = comparisons, chip = file.chip, collapse = collapse, nperm = nperm, permute = permute, rnd_type = rnd_type, seed = seed, set_max = set_max, set_min = set_min, plot_top_x = plot_top_x, norm = norm, save_rnd_lists = save_rnd_lists, median = median, num = num, scoring_scheme = scoring_scheme, make_sets = make_sets, mode = mode, metric = metric, order = order, include_only_symbols = include_only_symbols, sort = sort, zip_report = zip_report, run = run, verbose = verbose, dir.out = dout)
+        }
+    }
+    get.gsea <- function(regs = c("up", "down")) { ... }
     
-    get.hpg.significance <- function(hpg, mods = NULL, pval = 0.05, binarize = T) {
-        if (is.null(mods)) {
-            rnames <- rownames(hpg)
-            mods <- paste("mod", sort(as.numeric(unique(unlist(lapply(strsplit(rnames, "_"), function(x) x[2]))))), sep = "_")
-        }
-        get.hpg.sig <- function(mod, hpg, pval = 0.05, binarize = T) {
-            sn <- colnames(hpg)
-            rp <- paste(mod, "p", sep = "_")
-            p <- as.numeric(hpg[rp, ])
-            p[is.na(p)] <- 1
-            if (binarize) p <- 1 - as.numeric(p >= pval)
-            'names<-'(p, sn)
-        }
-        significance <- t(sapply(mods, get.hpg.sig, hpg = hpg, pval = pval, binarize = binarize, simplify = T, USE.NAMES = T))
+    run.gsea.preranked <- function(jar = "~/Applications/GSEA/gsea2-2.0.10.jar", rnk, gmx, memsize = 1024, collapse = FALSE, nperm = 10000, rpt.label = "my_analysis", rnd.seed = "timestamp", set.max = 500, set.min = 5, save_rnd_lists = FALSE, dir.out, run = TRUE, verbose = FALSE) {
+            dir.create(path = dir.out, recursive = T, showWarnings = F)
+    	    command = paste(
+                        "java", "-cp", jar,
+    					paste("-Xmx", memsize, "m", sep = ""), 
+    					"xtools.gsea.GseaPreranked",
+                        "-rnk", rnk,
+    					"-gmx", gmx,
+    					"-collapse", ifelse(collapse, "true", "false"), 
+    					"-nperm", nperm,
+                        "-save_rnd_lists", ifelse(save_rnd_lists, "true", "false"),
+    					"-rpt_label", rpt.label, 
+    					"-rnd_seed", rnd.seed,
+    					"-set_max", set.max,
+    					"-set_min", set.min,
+    					"-out", dir.out)
+    	    if (verbose) print(command)
+    	    if (run) system(command)
     }
-    get.hpg.significances <- function(hpgs, nregs = NULL, regs = NULL, percs = NULL, mods = NULL, pval = 0.05, binarize = T) {
-        if (is.null(nregs)) nregs <- names(hpgs)
-        if (is.null(regs)) regs <- names(hpgs[[1]])
-        if (is.null(percs)) percs <- names(hpgs[[1]][[1]])
-        if (is.null(mods)) {
-            rnames <- rownames(hpgs[[1]][[1]][[1]])
-            mods <- paste("mod", sort(as.numeric(unique(unlist(lapply(strsplit(rnames, "_"), function(x) x[2]))))), sep = "_")
+    run.gsea.preranked.batch <- function(jar = "~/Applications/GSEA/gsea2-2.0.10.jar", degs.preranked.batch, comparisons = NULL, gmx, memsize = 1024, collapse = FALSE, nperm = 10000, set.max = 500, set.min = 5, seed = "timestamp", save_rnd_lists = FALSE, dir.out = "Report/blood/gsea_preranked", run = TRUE, verbose = FALSE) {
+        if (is.null(comparisons)) comparisons <- names(degs.rnk)
+        for (comparison in comparisons) {
+            rnk <- degs.preranked.batch[[comparison]]
+            rnk[, 1] <- toupper(rnk[, 1])
+            file.out <- paste(comparison, "rnk", sep = ".")
+            fout <- file.path(dir.out, fout)
+            write.table(rnk, file = fout, row.names = F, col.names = F, sep = "\t", quote = F)
+            run.gsea.preranked(jar = jar, rnk = fout, gmx = gmx, memsize = memsize, collapse = collapse, nperm = nperm, rpt.label = comparison, rnd.seed = seed, set.max = set.max, set.min = set.min, dir.out = dir.out, save_rnd_lists = save_rnd_lists, run = run, verbose = verbose)
         }
-        sigsets <- NULL
-        for (nreg in nregs)
-            for (reg in regs)
-                for (perc in percs) {
-                    cat(nreg, reg, perc, "\n")
-                    sigsets[[nreg]][[reg]][[perc]] <- get.hpg.significance(hpgs[[nreg]][[reg]][[perc]], mods = mods, pval = pval, binarize = binarize)
-                }
-        sigsets
     }
-    get.hpg.significances.rep <- function(hpgs, reps, nregs = NULL, regs = NULL, percs = NULL, mods = NULL, pval = 0.05, binarize = T) {
-        if (is.null(reps)) reps <- names(hpgs)
-        if (is.null(nregs)) nregs <- names(hpgs[[1]])
-        if (is.null(regs)) regs <- names(hpgs[[1]][[1]])
-        if (is.null(percs)) percs <- names(hpgs[[1]][[1]][[1]])
-        if (is.null(mods)) {
-            rnames <- rownames(hpgs[[1]][[1]][[1]][[1]])
-            mods <- paste("mod", sort(as.numeric(unique(unlist(lapply(strsplit(rnames, "_"), function(x) x[2]))))), sep = "_")
-        }
-        sigsets <- NULL
-        for (rp in reps) {
-            cat(rp, "\n")
-            sigsets[[rp]] <- get.hpg.significances(hpgs = hpgs[[rp]], nregs = nregs, regs = regs, percs = percs, mods = mods, pval = pval, binarize = binarize)
-        }
-        sigsets
-    }
-    
-    # ============================================================
-    # GSEA preranked analysis
-    # ============================================================
-    get.gsea.gmx <- function(genesets, dir = ".", filename = "gsea", upper.case = T) {
-        if (upper.case) genesets <- rapply(genesets, function(x) unique(toupper(x)), how = "replace")
-        get.gmx.m <- function(genesets, type = "basic") {
-            if (type == "basic") {
-                m <- sapply(1:length(genesets), function(i) c("", genesets[[i]]$basic), simplify = F)
-                names(m) <- names(genesets)
-            }
-            else if (type == "paralog") {
-                m <- sapply(1:length(genesets), function(i) c("", union(genesets[[i]]$basic, genesets[[i]]$paralog)), simplify = T)
-                names(m) <- paste(names(genesets), "MAJOR", sep = ".")
-            }   
-            else if (is.null(type)) {
-                m <- sapply(1:length(genesets), function(i) c(names(genesets)[i], "", genesets[[i]]), simplify = F)
-                names(m) <- names(genesets)
-            }
-            m <- list2dataframe(m)
-        }
-        gmx <- list()
-        if (is.list(genesets[[1]])) {
-            basic <- get.gmx.m(genesets, type = "basic")
-            paralog <- get.gmx.m(genesets, type = "paralog")
-        } else {
-            gene <- get.gmx.m(genesets, type = NULL)
-        }
-        dir.create(dir, recursive = T, showWarnings = F)
-        if (is.list(genesets[[1]])) {
-            for (type in c("basic", "paralog")) {
-                m <- get.gmx.m(genesets, type)
-                gmx[[type]] <- m
-                file <- paste(filename, type, sep = "_")
-                file <- paste(file, "gmx", sep = ".")
-                fout <- paste(dir, file, sep = "/")
-                write.table(m, file = fout, col.names = T, row.names = F, quote = F, sep = "\t")
-            }
-        } else {
-            m <- get.gmx.m(genesets, NULL)
-            gmx <- m
-            file <- paste(file, "gmx", sep = ".")
-            fout <- paste(dir, file, sep = "/")
-            write.table(m, file = fout, col.names = T, row.names = F, quote = F, sep = "\t")
-        }
-        invisible(gmx)
-    }
-    # the input is regweight.fpr, in which the duplicate genes are already filtered
-    get.gsea.rnk <- function(regweight, mods = NULL, id.map, upper.case = TRUE) {
-        if (is.null(mods)) mods <- names(regweight)
-        collapse.rw <- function(rw, map) {
-            id0 <- names(rw)
-            id1 <- map[id0]
-            l0 <- length(id0)
-            l1 <- length(unlist(id1))
-            rw1 <- data.frame(reg = rep("", l1), weight = rep(NA, l1), stringsAsFactors = F)
-            j <- 1
-            for (i in 1:l0) {
-                if (i %% 1000 == 0) cat(i, "\n")
-                id <- id1[[i]] 
-                l <- length(id)
-                if (l == 0) next
-                k <- j + l - 1
-                rw1[j:k, 1] <- id
-                rw1[j:k, 2] <- rep(rw[i], l)
-                j <- k + 1 
-            } # for identical gene correspoding to multiple IDs and weights, select the max weight
-            rw2 <- tapply(rw1[, 2], rw1[, 1], max, simplify = T)
-        }
-        rnk <- sapply(mods, function(mod, rw, map, uc) {
-            cat(mod, "\n")
-            rw <- regweight[[mod]]
-            rw <- collapse.rw(rw, map)
-            if (uc) rw <- "names<-"(rw, toupper(names(rw)))
-            rw <- sort(rw, decreasing = T)
-            }, rw = regweight, map = id.map, uc = upper.case, USE.NAMES = T, simplify = T)
-    }
-    
-    get.gsea.rnks <- function(regweights, nregs = NULL, regs = NULL, percs = "perc_100", mods = NULL, id.map, upper.case = T) {
-        if (is.null(nregs)) nregs <- names(regweights)
-        if (is.null(regs)) regs <- names(regweights[[1]])
-        if (is.null(percs)) percs <- names(regweights[[1]][[1]])
-        if (is.null(mods)) mods <- names(regweights[[1]][[1]][[1]])
-        rnks <- NULL
-        for (nreg in nregs)
-            for (reg in regs)
-                for (perc in percs) {
-                    cat(nreg, reg, perc, "\n")
-                    rnks[[nreg]][[reg]][[perc]] <- list()
-                    rnks[[nreg]][[reg]][[perc]] <- get.gsea.rnk(regweights[[nreg]][[reg]][[perc]], mods = mods, id.map = id.map, upper.case = upper.case)
-                }
-        rnks
-    }
-    get.gsea.rnk.fpr <- function(dir, nreg, reg, perc, convert = FALSE, id.map = NULL, upper.case = T) {
-        file <- paste("reg", "p", perc, sep = "_")
-        file <- paste(file, "txt", sep = ".")
-        file <- paste(dir, paste("nreg", nreg, sep = "_"), reg, file, sep = "/")
-        regweight <- read.csv(file, sep = "\t", head = F, as.is = T)
-        regweight <- by(data = regweight, INDICES = regweight$V2, FUN = function(x) { y <- tapply(x$V3, x$V1, FUN = max, simplify = T); z <- as.vector(y); names(z)  <- names(y); z }, simplify = F)
-        names(regweight) <- paste("mod", names(regweight), sep = "_") 
-        regweight <- lapply(regweight, function(x) sort(unlist(x), decreasing = T))
-        if (convert && !is.null(id.map)) {
-            count <- 0
-            regweight <- lapply(regweight, function(rw, map) {
-                count <<- count + 1
-                cat("mod_", count, "\n", sep = "")
-                id0 <- names(rw)
-                id1 <- map[id0]
-                l0 <- length(id0)
-                l1 <- length(unlist(id1))
-                rw1 <- data.frame(reg = rep("", l1), weight = rep(NA, l1), stringsAsFactors = F)
-                j <- 1
-                sapply(1:l0, function(i, rw, id1) { 
-                       if (i %% 1000 == 0) cat("    ", i, "\n")
-                       id <- id1[[i]]; 
-                       l <- length(id); 
-                       if (l == 0) next
-                       k <- j + l - 1; 
-                       rw1[j:k, 1] <<- id; 
-                       rw1[j:k, 2] <<- rep(rw[i], l); 
-                       j <<- k + 1 }, rw = rw, id1 = id1, simplify = T)
-                rw2 <- tapply(rw1[, 2], rw1[, 1], max, simplify = T)
-            }, map = id.map)
-        }
-        if (upper.case) regweight <- lapply(regweight, function(x) { names(x) <- toupper(names(x)); x})
-        regweight
-    }
-    
-    gen.gsea.prerank <- function(jar = "/picb/clingenet/Applications/GSEA/gsea2-2.0.10.jar", rnk, file.gmx, xmx = 1024, collapse = FALSE, nperm = 3000, rpt.label, seed = NULL, set.max = 500, set.min = 5, dir.out, dir.log, script, run = FALSE) {
-        dir.create(path = dir.out, recursive = T, showWarnings = F)
-        file.out <- paste(rpt.label, "rnk", sep = ".")
-        fout <- paste(dir.out, file.out, sep = "/")
-        file.log <- paste(rpt.label, "log", sep = ".")
-        flog <- paste(dir.log, file.log, sep = "/")
-        write.table(rnk, file = fout, row.names = T, col.names = F, sep = "\t", quote = F)
-    	cmd = paste(
-            "java", "-cp", jar,
-    		paste("-Xmx", xmx, sep = ""), 
-    		"xtools.gsea.GseaPreranked",
-            "-rnk", fout,
-    		"-gmx", file.gmx,
-    		"-collapse", ifelse(collapse, "true", "false"),
-    		"-nperm", nperm,
-    		"-rpt_label", rpt.label, 
-            ifelse(is.null(seed), "", paste("-rnd_seed", seed)), 
-    		"-set_max", set.max,
-    		"-set_min", set.min,
-    		"-out", dir.out, 
-            ">", flog, 
-            "2>&1 &")
-        cat(cmd, file = script)
-    	if (run) {
-            exit <- system(cmd)
-            if (exit != 0) warning(rpt.label, ": has problem")
-            else T
+    run.gsea.preranked.batches <- function(jar = "~/Applications/GSEA/gsea2-2.0.10.jar", degs.preranked.batches, batches, comparisons.batches = NULL, gmx, memsize = 1024, collapse = FALSE, nperm = 10000, set.max = 500, set.min = 5, seed = "timestamp", save_rnd_lists = FALSE, dir.out = "Report/blood/gsea_preranked", run = TRUE, verbose = FALSE) {
+        for (batch in batches) {
+            degs.preranked.batch <- degs.preranked.batches[[batch]]
+            bat <- strsplit(batch, "\\.")[[1]][1]
+            comparisons.batch <- comparisons.batches[[bat]]
+            run.gsea.preranked.batch(jar = jar, degs.preranked.batch = degs.preranked.batch, comparisons = comparisons.batch, gmx = gmx, memsize = memsize, collapse = collapse, nperm = nperm, set.max = set.max, set.min = set.min, seed = seed, save_rnd_lists = save_rnd_lists, dir.out = dir.out, run = run, verbose = verbose)
         }
     }
     
-    gen.gsea.preranks <- function(jar = "/picb/clingenet/Applications/GSEA/gsea2-2.0.10.jar", rnks, rpt.labels = NULL, file.gmx, xmx = "1024m", collapse = FALSE, nperm = 3000, seed = NULL, set.max = 500, set.min = 5, dir.out, dir.log, dir.script, run = FALSE, procmax = 10) {
-        dir.create(dir.log, recursive = T, showWarnings = F)
-        dir.create(dir.script, recursive = T, showWarnings = F)
-        if (is.null(rpt.labels)) rpt.labels <- names(rnks)
-        i <- 0
-        for (label in rpt.labels) {
-            i <- i + 1
-            rnk <- rnks[[label]]
-            file.script <- paste("gsea", label, sep = "_")
-            file.script <- paste(file.script, "bash", sep = ".")
-            fscript <- paste(dir.script, file.script, sep = "/")
-            running <- gen.gsea.prerank(jar = jar, rnk = rnk, rpt.label = label, file.gmx = file.gmx, xmx = xmx, collapse = collapse, nperm = nperm, seed = seed, set.max = set.max, set.min = set.min, dir.out = dir.out, dir.log = dir.log, script = fscript, run = run)
-            if (run && running && i %% 10 == 0) {
-                while (running) {
-                    ps <- system2("ps", args = "-u $USER", stdout = T, stderr = F)
-                    if (any(grepl("java", ps))) Sys.sleep(5)
-                    else running <- F
-                }
-            }
-        }
-    }
-    gen.gseas.prerank <- function(jar = "/picb/clingenet/Applications/GSEA/gsea2-2.0.10.jar", ranks, nregs = "nreg_all", regs = NULL, percs = "perc_100", mods = NULL, rpt.labels = NULL, file.gmx, xmx = "1024m", collapse = FALSE, nperm = 3000, seed = NULL, set.max = 500, set.min = 5, dir.out, dir.log, dir.script, run = FALSE, procmax = 10) {
-        if (is.null(nregs)) nregs <- names(ranks)
-        if (is.null(regs)) regs <- names(ranks[[1]])
-        if (is.null(percs)) percs <- names(ranks[[1]][[1]])
-        if (is.null(mods)) mods <- names(ranks[[1]][[1]][[1]])
-        for (nreg in nregs)
-            for (reg in regs)
-                for (perc in percs) {
-                    rnks <- ranks[[nreg]][[reg]][[perc]]
-                    dout <- paste(dir.out, nreg, reg, perc, sep = "/")
-                    dlog <- paste(dir.log, nreg, reg, perc, sep = "/")
-                    dscript <- paste(dir.script, nreg, reg, perc, sep = "/")
-                    gen.gsea.preranks(jar = jar, rnks = rnks, rpt.labels = NULL, file.gmx = file.gmx, xmx = xmx, collapse = collapse, nperm = nperm, seed = seed, set.max = set.max, set.min = set.min, dir.out = dout, dir.log = dlog, dir.script = dscript, run = run, procmax = procmax)
-                }
-    }
-    read.gsea <- function(dir.in, mods, regs = c("up", "down"), sets, setsizes) {
-        # an ugly fix for the historical variable name
-        compares <- mods
+    get.gsea.batch <- function(dir.in, comparisons, regs = c("up", "down"), genesets, tool = "GseaPreranked") {
+        # tool: "Gsea" or "GseaPreranked"
         get.suffix <- function(dir) {
             sf <- strsplit(basename(list.dirs(dir, recursive = F, full.names = F)),"\\.")
             names(sf) <- sapply(sf, function(x) x[1])
@@ -510,9 +306,15 @@ local({
             rownames(m) <- m[, "NAME"]
             m <- m[, -ncol(m)] # remove the last column
         }
-        get.stat <- function(cmp, reg, dir, suf) {
-            REG <- c(up = "pos", down = "neg")
-            f <- paste("gsea", "report", "for", "na", REG[reg], suf, sep = "_")
+        get.stat <- function(cmp, reg, dir, suf, tool = "GseaPreranked") {
+            .regs <- c(up = "pos", down = "neg")
+            if (tool == "GseaPreranked") {
+                f <- paste("gsea", "report", "for", "na", .regs[reg], suf, sep = "_") 
+            } else if (tool == "Gsea") {
+                .cmps <- strsplit(cmp, "2")[[1]]
+                names(.cmps) <- c("up", "down")
+                f <- paste("gsea", "report", "for", .cmps[reg], suf, sep = "_")
+            }
             f <- paste(f, "xls", sep = ".")
             f <- paste(dir, f, sep = "/")
             m <- read.csv(file = f, head = T, sep = "\t", as.is = T, check.names = F)
@@ -553,24 +355,23 @@ local({
             stat <- stat[, -1]
             data.frame("ORIGINAL.SIZE" = set.size[sets, "ORIGINAL.SIZE"], stat[sets, ], stringsAsFactors = F)
         }
-        get.stats <- function(cmps, regs, dir, sets, setsizes) {
+        get.stats <- function(cmps, regs, dir, genesets, tool = "GseaPreranked") {
             suffix <- get.suffix(dir)
-            cmps.f <- get.cmp.failed(compares, suffix)
+            cmps.f <- get.cmp.failed(cmps, suffix)
             stats <- list()
-            n <- length(sets)
+            n <- ncol(genesets)
             for (cmp in cmps) {
-                cat(cmp, "\n")
                 if (!(cmp %in% cmps.f)) {
                     suf <- suffix[cmp]
-                    d <- paste(cmp, "GseaPreranked", suf, sep = ".")
+                    d <- paste(cmp, tool, suf, sep = ".")
                     d <- paste(dir, d, sep = "/")
                     for (reg in regs)
-                        stats[[cmp]][[reg]] <- get.stat(cmp = cmp, reg = reg, dir = d, suf = suf)
+                        stats[[cmp]][[reg]] <- get.stat(cmp = cmp, reg = reg, dir = d, suf = suf, tool = tool)
                 } else {
                     for (reg in regs) {
                         stat <- data.frame(
-                               "NAME" = sets,
-                               "ORIGINAL.SIZE" = setsizes,
+                               "NAME" = colnames(genesets),
+                               "ORIGINAL.SIZE" = sapply(genesets, function(x) { x <- x[x != ""]; length(x) }),
                                "SIZE" = rep(0, n), 
                                "ES" = rep(NA, n),
                                "NES" = rep(NA, n),
@@ -580,34 +381,31 @@ local({
                                "overlap" = rep("", n), 
                                "core" = rep("", n), 
                                stringsAsFactors = F)
-                        rownames(stat) <- sets
+                        rownames(stat) <- colnames(genesets)
                         stats[[cmp]][[reg]] <- stat
                     }
                 }
             }
             stats
         }
-        stats <- get.stats(cmps = compares, regs = regs, dir = dir.in, sets = sets, setsizes = setsizes)
+        stats <- get.stats(cmps = comparisons, regs = regs, dir = dir.in, genesets = genesets, tool = tool)
     }
-    read.gseas <- function(dir.in, nregs, regs, percs, mods, regulations = c("up", "down"), sets, setsizes) {
-        gseas <- NULL
-        for (nreg in nregs)
-            for (reg in regs)
-                for (perc in percs) {
-                    cat(nreg, reg, perc, "\n")
-                    din <- paste(dir.in, nreg, reg, perc, sep = "/")
-                    gseas[[nreg]][[reg]][[perc]] <- read.gsea(din, mods, regulations, sets, setsizes)
-                }
-        gseas
+    get.gsea.batches <- function(dir.in, batches, comparisons.batches, regs = c("up", "down"), genesets, tool = "GseaPreranked") {
+        gsea.batches <- list()
+        for (batch in batches) {
+            bat <- strsplit(batch, "\\.")[[1]][1]
+            comparisons <- comparisons.batches[[bat]]
+            din <- file.path(dir.in, batch)
+            gsea.batches[[batch]] <- get.gsea.batch(dir.in = din, comparisons = comparisons, regs = regs, genesets = genesets, tool = tool)
+        }
+        gsea.batches
     }
     
-    get.gsea.sigset <- function(gsea, mods, pval = 0.05, qval = NULL, fwer = NULL, n = 2) {
-        compares <- mods
-        sigset <- matrix("", ncol = 2, nrow = length(compares))
-        rownames(sigset) <- compares
-        colnames(sigset) <- c("up", "down")
+    get.gsea.sigsets <- function(gsea, compares, pval = 0.05, qval = NULL, fwer = NULL, n = 2) {
+        sigsets <- matrix("", ncol = 2, nrow = length(compares))
+        rownames(sigsets) <- compares
+        colnames(sigsets) <- c("up", "down")
         get.gs <- function(cmp, gsea, pval = 0.05, qval = NULL, fwer = NULL, n = 2) {
-            cat(cmp, "\n")
             stat.up <- gsea[[cmp]][["up"]]
             stat.down <- gsea[[cmp]][["down"]]
             flag.up <- rep(T, nrow(stat.up))
@@ -639,32 +437,17 @@ local({
             c(up = gs.up, down = gs.down)
         }
         for (cmp in compares) {
-            sigset[cmp, ] <- get.gs(cmp = cmp, gsea = gsea, pval = pval, qval = qval, fwer = fwer, n = n)
-        }
-        sigset
-        #as.data.frame(sigsets, stringsAsFactors = F)
-    }
+            sigsets[cmp, ] <- get.gs(cmp = cmp, gsea = gsea, pval = pval, qval = qval, fwer = fwer, n = n)
     
-    get.gsea.sigsets <- function(gseas, nregs = "nreg_all", regs, percs = "perc_100", mods, pval = 0.05, qval = NULL, fwer = NULL, n = 2) {
-        sigsets <- NULL
-        for (nreg in nregs)
-            for (reg in regs)
-                for (perc in percs) {
-                    cat(nreg, reg, perc, "\n")
-                    gsea <- gseas[[nreg]][[reg]][[perc]]
-                    sigsets[[nreg]][[reg]][[perc]] <- list()
-                    sigsets[[nreg]][[reg]][[perc]] <- get.gsea.sigset(gsea, mods, pval, qval, fwer, n)
-                }
+        }
         sigsets
     }
-    get.gsea.table <- function(gsea, mods, sets, regulations = c("up", "down")) {
-        # name conflict: regs = up/down conflicts with the global candidate regulator list names: regs = c(APE2RAB ...)
-        cmps <- mods
-        regs <- regulations
+    
+    get.gsea.table.batch <- function(gsea, comparisons, sets, regs = c("up", "down")) {
         gst <- NULL
         n <- length(sets)
-        for (cmp in cmps) {
-            cat(cmp, "\n")
+        if (is.null(comparisons)) comparisons <- names(gsea)
+        for (cmp in comparisons) {
             for (reg in regs) {
                 rnb <- paste(cmp, reg, sep = "_")
                 gs <- gsea[[cmp]][[reg]]
@@ -685,20 +468,69 @@ local({
             }
         }
         gst
-     #   as.data.frame(gst, stringsAsFactors = F)
     }
-    get.gsea.tables <- function(gseas, nregs = "nreg_all", regs, percs = "perc_100", mods, sets, regulations = c("up", "down")) {
-        gsea.tables <- NULL
-        for (nreg in nregs)
-            for (reg in regs)
-                for (perc in percs) {
-                    cat(nreg, reg, perc, "\n")
-                    gsea <- gseas[[nreg]][[reg]][[perc]]
-                    gsea.tables[[nreg]][[reg]][[perc]] <- list()
-                    gsea.tables[[nreg]][[reg]][[perc]] <- get.gsea.table(gsea, mods = mods, sets = sets, regulations = regulations)
+    get.gsea.table.batches <- function(gsea.batches, batches = NULL, comparisons.batches = NULL, sets, regs = c("up", "down")) {
+        gsea.table.batches <- list()
+        if (is.null(batches)) batches <- names(gsea.batches)
+        for (batch in batches) {
+            bat <- strsplit(batch, "\\.")[[1]][1]
+            comparisons <- comparisons.batches[[bat]]
+            gsea.batch <- gsea.batches[[batch]]
+            gsea.table.batches[[batch]] <- get.gsea.table(gsea.batch, comparisons, sets = sets, regs = regs)
+        }
+        gsea.table.batches
+    }
+    assemble.gsea.tables <- function(gsea.tables, headers, labels.rev = c("rev", "norev"), labels.rm = c("norm", "rm"), sets, rows = c("pval", "qval", "core"), regs = c("up", "down")) {
+    # headers is a 4-column matrix
+    # col1, assay: blood, tissue, joint
+    # col2, batch, batch1, batch2, merged
+    # col3, comparisons: AP_A2RA_B, ...
+    # col4, disp.names: "tissue early batch1"
+        gsea.tables.flatted <- list()
+        .maps.label <- c(norev = "NOREV", rev = "REV", norm = "HAS_RAB1", rm = "NO_RAB1")
+        assemble.gsea.table <- function(i, headers, label.rev, label.rm, sets, rows, regs, gsea.tables) {
+            header <- headers[i, ]
+            assay <- header[1]
+            bat <- header[2]
+            comparison <- header[3]
+            if (assay == "blood") {
+                if (bat == "batch1") {
+                    batch <- bat
+                } else {
+                    batch <- paste(bat, label.rev, label.rm, sep = ".")
                 }
-        gsea.tables
+            } else if (assay == "tissue") {
+                if (bat == "batch1") {
+                    batch <- bat
+                } else {
+                    batch <- paste(bat, label.rm, sep = ".")
+                }
+            } else if (assay == "joint") {
+                batch <- paste(bat, label.rm, sep = ".")
+            }
+            nreg <- length(regs)
+            nrow <- length(rows)
+            rownames <- paste(rep(comparison, nreg * nrow), 
+                              rep(regs, each = nrow),
+                              rows, sep = "_")
+            if (is.null(gsea.tables[[assay]][[batch]]) || 
+                ! all(rownames %in% rownames(gsea.tables[[assay]][[batch]]))) {
+                gsea.table <- matrix("", nrow = length(rownames), ncol = length(sets), dimnames = list(rownames, sets))
+            } else {
+                gsea.table <- gsea.tables[[assay]][[batch]][rownames, sets]
+            }
+            data.frame(assay = header[4], comparison = rownames, gsea.table, stringsAsFactors = F, row.names = NULL)
+        }
+        for (label.rev in labels.rev) 
+            for (label.rm in labels.rm) {
+                label <- paste(.maps.label[label.rev], .maps.label[label.rm], sep = "_")
+                gsea.table.flatted <- lapply(1:nrow(headers), assemble.gsea.table, headers = headers, label.rev = label.rev, label.rm = label.rm, sets = sets, rows = rows, regs = regs, gsea.tables)
+                gsea.table.flatted <- do.call(rbind, gsea.table.flatted)
+                gsea.tables.flatted[[label]] <- gsea.table.flatted
+            }
+        gsea.tables.flatted
     }
+
    for (obj in ls()) 
        assign(obj, get(obj), envir = Enrichments)
 })
