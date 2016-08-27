@@ -1,3 +1,5 @@
+#' RNAseq differential analyses using LIMMA, edgeR, DESeq, baySeq
+
 if (!exists("DiffAnal") || !is.environment(DiffAnal)) DiffAnal <- new.env(parent = emptyenv())
 
 local( {

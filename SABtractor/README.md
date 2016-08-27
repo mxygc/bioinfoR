@@ -1,3 +1,3 @@
 # SABtractor
 ---
-This is a simple gene sets extractor from SABioscience, the source website.
+A simple automated script to curate gene sets from SABioscience

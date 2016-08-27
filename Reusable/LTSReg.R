@@ -1,4 +1,5 @@
-#' use package robustbase for least trimmed squared regression (LTSR)
+#'  least trimmed squared regression (LTSR) using robustbase
+
 library(robustbase)
 library(MASS)
 mux <- 0; muy <- 0

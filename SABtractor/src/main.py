@@ -1,11 +1,7 @@
 #!/usr/local/bin/python2.7
 # encoding: utf-8
 '''
-This is a simple gene sets extractor from SABioscience, the source website 
-
-@author:     foehn <foehn@foxmail.com>
-@license:    GPL-v2
-@contact:    foehn@foxmail.com
+A simple automated curator for SABioscience gene sets 
 '''
 
 import os, sys

@@ -1,3 +1,5 @@
+#' Scripts of the factor analysis based pipeline
+#' for the integrative omics
 if (!exists("FactAnal") || !is.environment(FactAnal)) FactAnal <- new.env(parent = emptyenv())
 local ({
     normalize.exprs <- function(exprs, normalization) {

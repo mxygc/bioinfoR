@@ -1,3 +1,5 @@
+#' An example of batch downloading GEO data by GEOquery
+
 if (!exists("PC") || !is.environment(PC)) PC <- new.env(parent = emptyenv())
 local({
     get.exprs.gse <- function(gse = 'GSE14794') {

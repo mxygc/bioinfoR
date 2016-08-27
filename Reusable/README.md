@@ -1,2 +1,2 @@
 # Reusable
-Reusable codes from previous projects
+Reusable Scripts from previous projects

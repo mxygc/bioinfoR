@@ -1,3 +1,5 @@
+#' Scripts for demension reduction
+
 reduce.dims <- function(exprs, dir, file, grpcols, levels, annots, aligns, type = "pdf") {
     # ============================================================
     # MDS

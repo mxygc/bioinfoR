@@ -1,3 +1,5 @@
+#' Funtional analysis tools
+
 if (!exists("Enrichments") || !is.environment(Enrichments)) Enrichments <- new.env(parent = emptyenv())
 
 local({

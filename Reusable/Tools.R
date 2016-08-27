@@ -1,3 +1,5 @@
+#' Tools for IO and interaction with the system
+
 if (!exists("Tools") || !is.environment(Tools)) Tools <- new.env(parent = emptyenv())
 
 local({
