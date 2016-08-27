@@ -1,3 +1,3 @@
 # SABtractor
 ---
-A simple automated script to curate gene sets from SABioscience
+A simple script to automatically curate gene sets from SABioscience
